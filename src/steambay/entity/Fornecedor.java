@@ -7,7 +7,7 @@ package steambay.entity;
 
 /**
  *
- * @author Daniel
+ * @author Daniel, Thales e Gabriel
  */
 public class Fornecedor {
     
