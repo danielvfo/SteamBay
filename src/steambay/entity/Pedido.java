@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package steambay.dao;
+package steambay.entity;
 
 /**
  *
  * @author Daniel, Thales e Gabriel
  */
-public class GerenciarCarrinhoDAO {
+public class Pedido {
     
 }
