@@ -9,12 +9,12 @@ package steambay.ui;
  *
  * @author Daniel
  */
-public class GerenciarCarrinhoUI extends javax.swing.JFrame {
+public class CadastrarFornecedorUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form GerenciarCarrinhoUI
+     * Creates new form CadastrarFornecedorUI
      */
-    public GerenciarCarrinhoUI() {
+    public CadastrarFornecedorUI() {
         initComponents();
     }
 
@@ -60,20 +60,20 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GerenciarCarrinhoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarFornecedorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GerenciarCarrinhoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarFornecedorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GerenciarCarrinhoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarFornecedorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GerenciarCarrinhoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarFornecedorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GerenciarCarrinhoUI().setVisible(true);
+                new CadastrarFornecedorUI().setVisible(true);
             }
         });
     }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package steambay.ui;
+package steambay.entity;
 
 /**
  *
  * @author Daniel
  */
-public class ProdutoUI {
+public class Jogo {
     
 }

@@ -9,6 +9,6 @@ package steambay.dao;
  *
  * @author Daniel
  */
-public class ProdutoDAO {
+public class JogoDAO {
     
 }
