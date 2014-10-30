@@ -7,7 +7,7 @@ package steambay.dao;
 
 /**
  *
- * @author Daniel
+ * @author Daniel, Thales e Gabriel
  */
 public class JogoDAO {
     

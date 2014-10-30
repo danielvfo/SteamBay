@@ -7,7 +7,7 @@ package steambay.ui;
 
 /**
  *
- * @author Daniel
+ * @author Daniel, Thales e Gabriel
  */
 public class CadastrarFornecedorUI extends javax.swing.JFrame {
 
