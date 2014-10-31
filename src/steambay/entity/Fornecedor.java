@@ -11,10 +11,15 @@ package steambay.entity;
  */
 public class Fornecedor {
     String nome;
-    String nome_fantasia;
+    String razao_social;
     String cnpj;
     String telefone;
-    String endereco;
+    String logradouro;
+    String numero;
+    String complemento;
+    String cep;
+    String cidade;
+    String uf;
 
     public String getNome() {
         return nome;
@@ -24,12 +29,12 @@ public class Fornecedor {
         this.nome = nome;
     }
 
-    public String getNome_fantasia() {
-        return nome_fantasia;
+    public String getRazao_social() {
+        return razao_social;
     }
 
-    public void setNome_fantasia(String nome_fantasia) {
-        this.nome_fantasia = nome_fantasia;
+    public void setRazao_social(String razao_social) {
+        this.razao_social = razao_social;
     }
 
     public String getCnpj() {
@@ -48,13 +53,51 @@ public class Fornecedor {
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
-    
-    
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 }
