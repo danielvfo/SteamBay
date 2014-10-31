@@ -13,7 +13,7 @@ public class Jogo {
     private String nome;
     private boolean tipo;
     private int qtde;
-    private float tamanho;
+    private String tamanho;
     private float preco;
     private String especificacao;
     private String descricao;
@@ -42,11 +42,11 @@ public class Jogo {
         this.qtde = qtde;
     }
 
-    public float getTamanho() {
+    public String getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(float tamanho) {
+    public void setTamanho(String tamanho) {
         this.tamanho = tamanho;
     }
 
