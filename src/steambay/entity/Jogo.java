@@ -13,8 +13,8 @@ public class Jogo {
     private String nome;
     private boolean tipo;
     private int qtde;
-    private String tamanho;
-    private float preco;
+    private String tamanho; //Alterado o tipo deste atributo
+    private float preco; 
     private String especificacao;
     private String descricao;
 
