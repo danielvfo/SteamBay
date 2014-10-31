@@ -10,16 +10,16 @@ package steambay.entity;
  * @author Daniel, Thales e Gabriel
  */
 public class Fornecedor {
-    String nome;
-    String razao_social;
-    String cnpj;
-    String telefone;
-    String logradouro;
-    String numero;
-    String complemento;
-    String cep;
-    String cidade;
-    String uf;
+    private String nome;
+    private String razao_social;
+    private String cnpj;
+    private String telefone;
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String cep;
+    private String cidade;
+    private String uf;
 
     public String getNome() {
         return nome;
