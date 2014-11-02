@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/entity/Jogo.java</file>
-            <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/ui/GerenciarCarrinhoUI.java</file>
-            <file>file:/D:/Documentos/GitHub/SteamBay/src/SteamBay.java</file>
             <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/dao/Conexao.java</file>
+            <file>file:/D:/Documentos/GitHub/SteamBay/test/FornecedorDAOTest.java</file>
             <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/entity/Fornecedor.java</file>
-            <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/ui/CadastrarProdutoUI.java</file>
             <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/dao/FornecedorDAO.java</file>
-            <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/entity/Pedido.java</file>
             <file>file:/D:/Documentos/GitHub/SteamBay/src/steambay/ui/CadastrarFornecedorUI.java</file>
         </group>
     </open-files>
