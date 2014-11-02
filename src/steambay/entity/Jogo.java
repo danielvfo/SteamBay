@@ -10,6 +10,7 @@ package steambay.entity;
  * @author Daniel, Thales e Gabriel
  */
 public class Jogo {
+    private int id;
     private String nome;
     private boolean tipo;
     private int qtde;
@@ -17,6 +18,14 @@ public class Jogo {
     private float preco; 
     private String especificacao;
     private String descricao;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
