@@ -58,6 +58,7 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Carrinho");
         setResizable(false);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
