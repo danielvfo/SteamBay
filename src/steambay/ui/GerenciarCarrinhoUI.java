@@ -29,7 +29,7 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
     private int conttabela = 0;
     private String string;
     private String[] parts;
-    NumberFormat formatter = new DecimalFormat("#0.00");   
+    NumberFormat formatter = new DecimalFormat("#0.00");
 
     public GerenciarCarrinhoUI() {
         initComponents();
@@ -220,6 +220,13 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         text = text.replace(",", ".");
         jTextField2.setText(text);
     }
+
+    private void atualizaLinha() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.setValueAt(i + 1, i, 0);
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         string = String.valueOf(jComboBox1.getSelectedItem());
         parts = string.split(", ");
@@ -227,6 +234,7 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         model.addRow(new Object[]{String.valueOf(conttabela + 1), parts[0], parts[1], parts[2], parts[3]});
         conttabela++;
         calculaPreco();
+        atualizaLinha();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -255,6 +263,7 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
             model.removeRow(rows[i] - i);
         }
         calculaPreco();
+        atualizaLinha();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTable1ComponentAdded
@@ -285,7 +294,7 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         pedido.setTotal(Double.parseDouble(jTextField2.getText().trim()));
         pedidodao.inserePedido(pedido);
         idPedido = pedidodao.buscarPedido();
-        for (int i=0; i<model.getRowCount(); i++){
+        for (int i = 0; i < model.getRowCount(); i++) {
             pedidodao.insereJogoPedido(Integer.parseInt(String.valueOf(model.getValueAt(i, 4))), idPedido);
         }
         boolean dep = false;
