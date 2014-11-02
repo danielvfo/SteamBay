@@ -26,7 +26,6 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
     PedidoDAO pedidodao = new PedidoDAO();
     Pedido pedido = new Pedido();
     ArrayList<Jogo> vcb = new ArrayList<>();
-    private int conttabela = 0;
     private String string;
     private String[] parts;
     NumberFormat formatter = new DecimalFormat("#0.00");
@@ -231,8 +230,7 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         string = String.valueOf(jComboBox1.getSelectedItem());
         parts = string.split(", ");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[]{String.valueOf(conttabela + 1), parts[0], parts[1], parts[2], parts[3]});
-        conttabela++;
+        model.addRow(new Object[]{0, parts[0], parts[1], parts[2], parts[3]});
         calculaPreco();
         atualizaLinha();
     }//GEN-LAST:event_jButton1ActionPerformed
