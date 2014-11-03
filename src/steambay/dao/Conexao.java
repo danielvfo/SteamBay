@@ -21,6 +21,10 @@ public class Conexao {
   
    private Connection con;  
    private Statement comando; 
+
+    public Statement getComando() {
+        return comando;
+    }
    
    public static Connection conexao(String url, String nome, String senha, int steambay) throws ClassNotFoundException, SQLException {  
       switch (steambay){        
