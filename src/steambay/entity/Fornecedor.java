@@ -21,6 +21,33 @@ public class Fornecedor {
     private String cidade;
     private String uf;
 
+    public Fornecedor(String nome, String razao_social, String cnpj, String telefone, String logradouro, String numero, String complemento, String cep, String cidade, String uf) {
+        this.nome = nome;
+        this.razao_social = razao_social;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+
+        public Fornecedor(String nome, String razao_social, String cnpj, String telefone, String logradouro, String numero, String cep, String cidade, String uf) {
+        this.nome = nome;
+        this.razao_social = razao_social;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+    
+    public Fornecedor(){}
+    
     public String getNome() {
         return nome;
     }
