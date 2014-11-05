@@ -14,6 +14,13 @@ public class Pedido {
     private int quantidade;
     private double total;
 
+    public Pedido(){}
+    
+    public Pedido(int i, double d) {
+        this.quantidade = i;
+        this.total = d;
+    }
+
     public int getId() {
         return id;
     }

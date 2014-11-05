@@ -94,4 +94,19 @@ public class PedidoDAO {
             conexao.fechar();
         }
     }
+    
+    public void apagar(int id){
+        conexao.conectar();
+        try{
+            conexao.getComando().executeUpdate("DELETE FROM jogo_pedido WHERE pedido_id = " + id + ";");
+            conexao.getComando().executeUpdate("DELETE FROM pedido WHERE id = " + id + ";");
+            System.out.println("Pedido de id = " + id + " removido com sucesso!");
+        }
+        catch(SQLException e){
+            conexao.imprimeErro("Erro ao apagar pedido ", e.getMessage());
+        }
+        finally{
+            conexao.fechar();
+        }
+    }    
 }
