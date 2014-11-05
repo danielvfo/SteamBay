@@ -5,7 +5,9 @@
  */
 package steambay.ui;
 
-import javax.swing.JFrame;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import steambay.dao.FornecedorDAO;
 import steambay.entity.Fornecedor;
 
@@ -20,6 +22,8 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
      */
     public CadastrarFornecedorUI() {
         initComponents();
+        salvar.setEnabled(false);
+        remover.setEnabled(false);
     }
 
     /**
@@ -58,6 +62,8 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         remover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gerenciar Fornecedor");
+        setResizable(false);
 
         nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,10 +78,21 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         jLabel3.setText("CNPJ");
 
         cnpj.setToolTipText("");
+        cnpj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cnpjActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Telefone");
 
         jLabel5.setText("Logradouro");
+
+        logradouro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logradouroActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Número");
 
@@ -144,7 +161,7 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cnpj)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -162,16 +179,16 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cadastrar)
                                 .addGap(18, 18, 18)
                                 .addComponent(limpar)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
-                                .addGap(56, 56, 56)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cidade)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel10)
@@ -254,7 +271,6 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
         Fornecedor fornecedor = new Fornecedor();
         FornecedorDAO acao = new FornecedorDAO();
-        
         String tnome;
         String trazao_social;
         String tcnpj;
@@ -277,47 +293,72 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         tcidade = cidade.getText();
         tuf = uf.getText();
 
+        Pattern padraoCnpj = Pattern.compile("\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}");
+        Matcher verificaCnpj = padraoCnpj.matcher(tcnpj);
+        //Verifica se os campos não estão vazios
         if((!tcnpj.isEmpty()) && (!tnome.isEmpty()) && (!trazao_social.isEmpty()) && (!ttelefone.isEmpty()) && (!tlogradouro.isEmpty()) && (!tnumero.isEmpty()) && (!tcep.isEmpty()) && (!tcidade.isEmpty()) && (!tuf.isEmpty())){
-            fornecedor.setNome(tnome);
-            fornecedor.setRazao_social(trazao_social);
-            fornecedor.setCnpj(tcnpj);
-            fornecedor.setTelefone(ttelefone);
-            fornecedor.setLogradouro(tlogradouro);
-            fornecedor.setNumero(tnumero);
-            fornecedor.setComplemento(tcomplemento);
-            fornecedor.setCep(tcep);
-            fornecedor.setCidade(tcidade);
-            fornecedor.setUf(tuf);
-            
-            acao.insere(fornecedor);
+            if(verificaCnpj.matches()){
+                fornecedor.setNome(tnome);
+                fornecedor.setRazao_social(trazao_social);
+                fornecedor.setCnpj(tcnpj);
+                fornecedor.setTelefone(ttelefone);
+                fornecedor.setLogradouro(tlogradouro);
+                fornecedor.setNumero(tnumero);
+                fornecedor.setComplemento(tcomplemento);
+                fornecedor.setCep(tcep);
+                fornecedor.setCidade(tcidade);
+                fornecedor.setUf(tuf);
+
+                if(fornecedor.getCnpj().length() == 18 && fornecedor.getUf().length() == 2){
+                    acao.insere(fornecedor);
+                    JOptionPane.showMessageDialog(logradouro, "Fornecedor cadastrado com sucesso!");
+                }
+                else if(fornecedor.getUf().length() == 2)
+                    JOptionPane.showMessageDialog(logradouro, "O CNPJ deve possuir 18 digitos!");
+                else if(fornecedor.getCnpj().length() == 18)
+                    JOptionPane.showMessageDialog(logradouro, "O UF deve possuir 2 digitos!");
+                else
+                    JOptionPane.showMessageDialog(logradouro, "O CNPJ deve possuir 18 digitos e o UF deve possuir 2 digitos!");
+            }
+            else{
+                JOptionPane.showMessageDialog(logradouro, "O CNPJ está no formato errado!!");
+                JOptionPane.showMessageDialog(logradouro, "Formato esperado: XX.XXX.XXX/XXXX-XX");
+            }
         }
+        else
+            JOptionPane.showMessageDialog(logradouro, "Faltam informações para cadastrar o fornecedor!");
     }//GEN-LAST:event_cadastrarActionPerformed
 
     private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
         Fornecedor fornecedor = new Fornecedor();
         FornecedorDAO acao = new FornecedorDAO();
-        
         String tcnpj;
         
         tcnpj = cnpj.getText();
-        fornecedor = acao.buscar(tcnpj);
         
-        nome.setText(fornecedor.getNome());
-        razao_social.setText(fornecedor.getRazao_social());
-        cnpj.setText(fornecedor.getCnpj());
-        telefone.setText(fornecedor.getTelefone());
-        logradouro.setText(fornecedor.getLogradouro());
-        numero.setText(fornecedor.getNumero());
-        complemento.setText(fornecedor.getComplemento());
-        cep.setText(fornecedor.getCep());
-        cidade.setText(fornecedor.getCidade());
-        uf.setText(fornecedor.getUf());
+        if(acao.buscar(tcnpj).getCnpj() != null){
+            salvar.setEnabled(true);
+            remover.setEnabled(true);
+            fornecedor = acao.buscar(tcnpj);
+            nome.setText(fornecedor.getNome());
+            razao_social.setText(fornecedor.getRazao_social());
+            cnpj.setText(fornecedor.getCnpj());
+            telefone.setText(fornecedor.getTelefone());
+            logradouro.setText(fornecedor.getLogradouro());
+            numero.setText(fornecedor.getNumero());
+            complemento.setText(fornecedor.getComplemento());
+            cep.setText(fornecedor.getCep());
+            cidade.setText(fornecedor.getCidade());
+            uf.setText(fornecedor.getUf());
+            JOptionPane.showMessageDialog(logradouro, "Fornecedor encontrado!");
+        }
+        else
+            JOptionPane.showMessageDialog(logradouro, "Fornecedor não encontrado!");
     }//GEN-LAST:event_pesquisarActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
         Fornecedor fornecedor = new Fornecedor();
         FornecedorDAO acao = new FornecedorDAO();
-        
         String tnome;
         String trazao_social;
         String tcnpj;
@@ -340,34 +381,58 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         tcidade = cidade.getText();
         tuf = uf.getText();
         
+        Pattern padraoCnpj = Pattern.compile("\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}");
+        Matcher verificaCnpj = padraoCnpj.matcher(tcnpj);
+        
         if((!tcnpj.isEmpty()) && (!tnome.isEmpty()) && (!trazao_social.isEmpty()) && (!ttelefone.isEmpty()) && (!tlogradouro.isEmpty()) && (!tnumero.isEmpty()) && (!tcep.isEmpty()) && (!tcidade.isEmpty()) && (!tuf.isEmpty())){
-            fornecedor.setNome(tnome);
-            fornecedor.setRazao_social(trazao_social);
-            fornecedor.setCnpj(tcnpj);
-            fornecedor.setTelefone(ttelefone);
-            fornecedor.setLogradouro(tlogradouro);
-            fornecedor.setNumero(tnumero);
-            fornecedor.setComplemento(tcomplemento);
-            fornecedor.setCep(tcep);
-            fornecedor.setCidade(tcidade);
-            fornecedor.setUf(tuf);
-            
-            if(acao.buscar(tcnpj).getCnpj() != null)
-                acao.atualizar(fornecedor);
+            if(verificaCnpj.matches()){
+                fornecedor.setNome(tnome);
+                fornecedor.setRazao_social(trazao_social);
+                fornecedor.setCnpj(tcnpj);
+                fornecedor.setTelefone(ttelefone);
+                fornecedor.setLogradouro(tlogradouro);
+                fornecedor.setNumero(tnumero);
+                fornecedor.setComplemento(tcomplemento);
+                fornecedor.setCep(tcep);
+                fornecedor.setCidade(tcidade);
+                fornecedor.setUf(tuf);
+
+                if((acao.buscar(tcnpj).getCnpj() != null) && (JOptionPane.showConfirmDialog(logradouro, "Deseja realmente alterar os dados do Fornecedor de CNPJ: " +tcnpj+ "?")) == 0){
+                    salvar.setEnabled(false);
+                    acao.atualizar(fornecedor);
+                    JOptionPane.showMessageDialog(logradouro, "Fornecedor alterado com sucesso!");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(logradouro, "O CNPJ está no formato errado!!");
+                JOptionPane.showMessageDialog(logradouro, "Formato esperado: XX.XXX.XXX/XXXX-XX");
+            }
         }
     }//GEN-LAST:event_salvarActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
         Fornecedor fornecedor = new Fornecedor();
         FornecedorDAO acao = new FornecedorDAO();
-        
         String tcnpj;
         
         tcnpj = cnpj.getText();
         
-        if(acao.buscar(tcnpj).getCnpj() != null)
+        
+        if((acao.buscar(tcnpj).getCnpj() != null) && (JOptionPane.showConfirmDialog(logradouro, "Deseja realmente remover o Fornecedor de CNPJ: " +tcnpj+ "?")) == 0){
+            remover.setEnabled(false);
+            salvar.setEnabled(false);
             acao.apagar(tcnpj);
+            JOptionPane.showMessageDialog(logradouro, "Fornecedor removido com sucesso!");
+            }
     }//GEN-LAST:event_removerActionPerformed
+
+    private void logradouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logradouroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logradouroActionPerformed
+
+    private void cnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnpjActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cnpjActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,7 +469,6 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         });
     }
 
-    private javax.swing.JFrame pesquisa;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrar;
     private javax.swing.JTextField cep;
