@@ -10,6 +10,7 @@ package steambay.entity;
  * @author Daniel, Thales e Gabriel
  */
 public class Jogo {
+    private int id;
     private String nome;
     private boolean tipo;
     private int qtde;
@@ -17,6 +18,39 @@ public class Jogo {
     private float preco; 
     private String especificacao;
     private String descricao;
+    private int fornecedor;
+
+    public Jogo()
+    {
+    }
+    
+    public Jogo (String nome, boolean tipo, int qtde, String tamanho, float preco, String especificacao, String descricao, int fornecedor)
+    {
+        setNome(nome);
+        setTipo(tipo);
+        setQtde(qtde);
+        setTamanho(tamanho);
+        setPreco(preco);
+        setEspecificacao(especificacao);
+        setDescricao(descricao);
+        setFornecedor(fornecedor);
+    }
+    
+    public int getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(int fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

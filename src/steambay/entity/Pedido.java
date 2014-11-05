@@ -10,8 +10,24 @@ package steambay.entity;
  * @author Daniel, Thales e Gabriel
  */
 public class Pedido {
+    private int id;
     private int quantidade;
     private double total;
+
+    public Pedido(){}
+    
+    public Pedido(int i, double d) {
+        this.quantidade = i;
+        this.total = d;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getQuantidade() {
         return quantidade;

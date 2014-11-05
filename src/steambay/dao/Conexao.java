@@ -19,8 +19,8 @@ public class Conexao {
    private static final String MySQLDriver = "com.mysql.jdbc.Driver";  
    private final String URL = "jdbc:mysql://localhost/steambay", NOME = "user", SENHA = "123456";  
   
-   private Connection con;
-   private Statement comando;
+   private Connection con;  
+   private Statement comando; 
 
     public Statement getComando() {
         return comando;

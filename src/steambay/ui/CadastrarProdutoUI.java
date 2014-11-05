@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package steambay.ui;
+import java.util.ArrayList;
+import steambay.dao.JogoDAO;
+import steambay.entity.Jogo;
 
 /**
  *
@@ -27,21 +30,393 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelNome = new javax.swing.JLabel();
+        jTextFieldNome = new javax.swing.JTextField();
+        jLabelTipo = new javax.swing.JLabel();
+        jCheckBoxTipo = new javax.swing.JCheckBox();
+        jLabelQtde = new javax.swing.JLabel();
+        jTextFieldQtde = new javax.swing.JTextField();
+        jLabelTam = new javax.swing.JLabel();
+        jTextFieldTam = new javax.swing.JTextField();
+        jLabelPreco = new javax.swing.JLabel();
+        jTextFieldPreco = new javax.swing.JTextField();
+        jLabelEspec = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaEspec = new javax.swing.JTextArea();
+        jLabelDesc = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaDesc = new javax.swing.JTextArea();
+        jButtonSave = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jLabelFornecedor = new javax.swing.JLabel();
+        jTextFieldFornecedor = new javax.swing.JTextField();
+        jButtonSearch = new javax.swing.JButton();
+        jButtonDrop = new javax.swing.JButton();
+        jButtonClean = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jLabelNome.setLabelFor(jTextFieldNome);
+        jLabelNome.setText("Nome");
+
+        jTextFieldNome.setToolTipText("Digite o nome do jogo.");
+
+        jLabelTipo.setLabelFor(jCheckBoxTipo);
+        jLabelTipo.setText("Tipo");
+
+        jCheckBoxTipo.setText("Jogo Físico");
+        jCheckBoxTipo.setToolTipText("Selecione se o jogo for em mídia física - deixe em branco se for mídia digital.");
+        jCheckBoxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxTipoActionPerformed(evt);
+            }
+        });
+
+        jLabelQtde.setLabelFor(jTextFieldQtde);
+        jLabelQtde.setText("Quantidade");
+        jLabelQtde.setEnabled(false);
+
+        jTextFieldQtde.setToolTipText("Digite quantos produtos serão adicionados no estoque.");
+        jTextFieldQtde.setEnabled(false);
+        jTextFieldQtde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldQtdeActionPerformed(evt);
+            }
+        });
+        jTextFieldQtde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldQtdeKeyTyped(evt);
+            }
+        });
+
+        jLabelTam.setLabelFor(jTextFieldTam);
+        jLabelTam.setText("Tamanho");
+
+        jTextFieldTam.setToolTipText("Digite o tamanho (com unidade de medida) que o jogo ocupará no disco rígido do usuário.");
+        jTextFieldTam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTamActionPerformed(evt);
+            }
+        });
+
+        jLabelPreco.setLabelFor(jTextFieldPreco);
+        jLabelPreco.setText("Preço");
+
+        jTextFieldPreco.setToolTipText("Digite o preço (em Reais) do produto.");
+        jTextFieldPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPrecoActionPerformed(evt);
+            }
+        });
+
+        jLabelEspec.setLabelFor(jTextAreaEspec);
+        jLabelEspec.setText("Especificações Técnicas");
+
+        jTextAreaEspec.setColumns(20);
+        jTextAreaEspec.setRows(5);
+        jTextAreaEspec.setToolTipText("Digite as especificações técnicas do jogo.");
+        jTextAreaEspec.setWrapStyleWord(true);
+        jTextAreaEspec.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane1.setViewportView(jTextAreaEspec);
+
+        jLabelDesc.setLabelFor(jTextAreaDesc);
+        jLabelDesc.setText("Descrição");
+
+        jTextAreaDesc.setColumns(20);
+        jTextAreaDesc.setRows(5);
+        jTextAreaDesc.setToolTipText("Digite uma descrição para o jogo.");
+        jTextAreaDesc.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(jTextAreaDesc);
+
+        jButtonSave.setText("Salvar");
+        jButtonSave.setToolTipText("Salva as informações no banco de dados.");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.setToolTipText("Fechar a janela.");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+
+        jLabelFornecedor.setLabelFor(jTextFieldFornecedor);
+        jLabelFornecedor.setText("Fornecedor");
+
+        jTextFieldFornecedor.setToolTipText("Digite o ID do fornecedor.");
+        jTextFieldFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFornecedorActionPerformed(evt);
+            }
+        });
+
+        jButtonSearch.setText("Buscar");
+        jButtonSearch.setToolTipText("Busca um jogo no banco de dados baseado no nome inserido.");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
+            }
+        });
+
+        jButtonDrop.setText("Apagar");
+        jButtonDrop.setToolTipText("Busca e apaga o jogo cujo nome foi inserido.");
+        jButtonDrop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDropActionPerformed(evt);
+            }
+        });
+
+        jButtonClean.setText("Limpar");
+        jButtonClean.setToolTipText("Limpa todos os campos e áreas de texto.");
+        jButtonClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCleanActionPerformed(evt);
+            }
+        });
+
+        jButtonUpdate.setText("Atualizar");
+        jButtonUpdate.setToolTipText("Sobrescreve o jogo cujo nome foi inserido. Recomenda-se buscá-lo antes.");
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelEspec)
+                                .addGap(198, 198, 198)
+                                .addComponent(jLabelDesc))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelNome)
+                                        .addGap(169, 169, 169)
+                                        .addComponent(jLabelTipo)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, Short.MAX_VALUE)
+                                        .addComponent(jCheckBoxTipo)))
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelQtde)
+                                    .addComponent(jTextFieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelTam)
+                                    .addComponent(jTextFieldTam, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelPreco)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabelFornecedor))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldFornecedor)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonSearch)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonClean)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDrop)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addComponent(jButtonSave)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelNome)
+                            .addComponent(jLabelTipo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxTipo)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelTam)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextFieldTam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelQtde)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextFieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelPreco)
+                            .addComponent(jLabelFornecedor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEspec)
+                    .addComponent(jLabelDesc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSave)
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonSearch)
+                    .addComponent(jButtonDrop)
+                    .addComponent(jButtonClean)
+                    .addComponent(jButtonUpdate))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldQtdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQtdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldQtdeActionPerformed
+
+    private void jTextFieldTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTamActionPerformed
+
+    private void jTextFieldPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPrecoActionPerformed
+
+    private void jTextFieldQtdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtdeKeyTyped
+        String nums="0987654321";
+        if(!nums.contains(evt.getKeyChar()+"")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldQtdeKeyTyped
+
+    private void jCheckBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTipoActionPerformed
+        if (jCheckBoxTipo.isSelected()) {
+            jLabelQtde.setEnabled(true);
+            jTextFieldQtde.setEnabled(true);
+        }
+        else {
+            jLabelQtde.setEnabled(false);
+            jTextFieldQtde.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCheckBoxTipoActionPerformed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        String tNome = jTextFieldNome.getText();
+        boolean tTipo = jCheckBoxTipo.isSelected();
+        int tQtde = 0;
+        if (tTipo)
+            tQtde = Integer.parseInt(jTextFieldQtde.getText().trim());
+        String tTamanho = jTextFieldTam.getText();
+        float tPreco = Float.parseFloat(jTextFieldPreco.getText().trim());
+        String tEsp = jTextAreaEspec.getText();
+        String tDesc = jTextAreaDesc.getText();
+        int tForn = Integer.parseInt(jTextFieldFornecedor.getText().trim());
+        if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty() && !jTextFieldFornecedor.getText().isEmpty()) {
+            Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
+            JogoDAO jogoDAO = new JogoDAO();
+            if (jogoDAO.buscar(tNome).size() < 1)
+                jogoDAO.insere(tJogo);
+        }
+    }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jTextFieldFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFornecedorActionPerformed
+
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        Jogo tJogo;
+        JogoDAO jogoDAO = new JogoDAO();
+        if (!jTextFieldNome.getText().isEmpty())
+            if (jogoDAO.buscar(jTextFieldNome.getText()).size() > 0) {
+                tJogo = jogoDAO.buscar(jTextFieldNome.getText()).get(0);
+                jTextAreaDesc.setText(tJogo.getDescricao());
+                jTextAreaEspec.setText(tJogo.getEspecificacao());
+                jTextFieldFornecedor.setText(String.valueOf(tJogo.getFornecedor()));
+                jTextFieldNome.setText(tJogo.getNome());
+                jTextFieldPreco.setText(String.valueOf(tJogo.getPreco()));
+                if (tJogo.isTipo() != jCheckBoxTipo.isSelected())
+                    jCheckBoxTipo.doClick();
+                if (tJogo.isTipo())
+                    jTextFieldQtde.setText(String.valueOf(tJogo.getQtde()));
+                jTextFieldTam.setText(tJogo.getTamanho());
+            }
+        
+    }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    private void jButtonDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDropActionPerformed
+        JogoDAO jogoDAO = new JogoDAO();
+        String tNome = jTextFieldNome.getText();
+        if (!jTextFieldNome.getText().isEmpty())
+            if (jogoDAO.buscar(tNome).size() > 0)
+                jogoDAO.apagar(tNome);
+    }//GEN-LAST:event_jButtonDropActionPerformed
+
+    private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
+        jTextAreaDesc.setText("");
+        jTextAreaEspec.setText("");
+        jTextFieldFornecedor.setText("");
+        jTextFieldNome.setText("");
+        jTextFieldPreco.setText("");
+        if (jCheckBoxTipo.isSelected())
+            jCheckBoxTipo.doClick();
+        jTextFieldQtde.setText("");
+        jTextFieldTam.setText("");
+    }//GEN-LAST:event_jButtonCleanActionPerformed
+
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+        String tNome = jTextFieldNome.getText();
+        boolean tTipo = jCheckBoxTipo.isSelected();
+        int tQtde = 0;
+        if (tTipo)
+            tQtde = Integer.parseInt(jTextFieldQtde.getText().trim());
+        String tTamanho = jTextFieldTam.getText();
+        float tPreco = Float.parseFloat(jTextFieldPreco.getText().trim());
+        String tEsp = jTextAreaEspec.getText();
+        String tDesc = jTextAreaDesc.getText();
+        int tForn = Integer.parseInt(jTextFieldFornecedor.getText().trim());
+        if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty() && !jTextFieldFornecedor.getText().isEmpty()) {
+            Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
+            JogoDAO jogoDAO = new JogoDAO();
+            if (jogoDAO.buscar(tNome).size() > 0)
+                    jogoDAO.atualizar(tJogo);
+        }
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +454,29 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonClean;
+    private javax.swing.JButton jButtonDrop;
+    private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JButton jButtonUpdate;
+    private javax.swing.JCheckBox jCheckBoxTipo;
+    private javax.swing.JLabel jLabelDesc;
+    private javax.swing.JLabel jLabelEspec;
+    private javax.swing.JLabel jLabelFornecedor;
+    private javax.swing.JLabel jLabelNome;
+    private javax.swing.JLabel jLabelPreco;
+    private javax.swing.JLabel jLabelQtde;
+    private javax.swing.JLabel jLabelTam;
+    private javax.swing.JLabel jLabelTipo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextAreaDesc;
+    private javax.swing.JTextArea jTextAreaEspec;
+    private javax.swing.JTextField jTextFieldFornecedor;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldPreco;
+    private javax.swing.JTextField jTextFieldQtde;
+    private javax.swing.JTextField jTextFieldTam;
     // End of variables declaration//GEN-END:variables
 }
