@@ -183,8 +183,9 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel9))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addComponent(cadastrar)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(limpar)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -309,7 +310,7 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                 fornecedor.setCidade(tcidade);
                 fornecedor.setUf(tuf);
 
-                if(fornecedor.getCnpj().length() == 18 && fornecedor.getUf().length() == 2){
+                if(fornecedor.getUf().length() == 2){
                     acao.insere(fornecedor);
                     JOptionPane.showMessageDialog(logradouro, "Fornecedor cadastrado com sucesso!");
                 }

@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import steambay.dao.PedidoDAO;
 import steambay.entity.Jogo;
@@ -292,11 +293,16 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         pedido.setQuantidade(model.getRowCount());
         pedido.setTotal(Double.parseDouble(jTextField2.getText().trim()));
-        pedidodao.inserePedido(pedido);
+        try {
+            pedidodao.inserePedido(pedido);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao finalizar peidido.");
+        }
         idPedido = pedidodao.buscarPedido();
         for (int i = 0; i < model.getRowCount(); i++) {
             pedidodao.insereJogoPedido(Integer.parseInt(String.valueOf(model.getValueAt(i, 4))), idPedido);
         }
+        JOptionPane.showMessageDialog(jTable1, "Pedido finalizado com sucesso!");
         jButton3.setEnabled(false);
     }//GEN-LAST:event_jButton4ActionPerformed
     /**

@@ -5,6 +5,7 @@
  */
 package steambay.ui;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import steambay.dao.JogoDAO;
 import steambay.entity.Jogo;
 
@@ -346,8 +347,10 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty() && !jTextFieldFornecedor.getText().isEmpty()) {
             Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
             JogoDAO jogoDAO = new JogoDAO();
-            if (jogoDAO.buscar(tNome).size() < 1)
+            if (jogoDAO.buscar(tNome).size() < 1){
                 jogoDAO.insere(tJogo);
+                JOptionPane.showMessageDialog(jTextAreaEspec, "Jogo cadastrado com sucesso!");
+            }
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
