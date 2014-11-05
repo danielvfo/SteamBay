@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import steambay.entity.Fornecedor;
 
 /**
@@ -66,8 +68,8 @@ public class FornecedorDAO {
     public void atualizar(Fornecedor fornecedor) {  
         conexao.conectar();
         String com = "UPDATE Fornecedor SET nome = '" + fornecedor.getNome()
-            + "', razao_social =" + fornecedor.getRazao_social()
-            + ", cnpj = '" + fornecedor.getCnpj()
+            + "', razao_social ='" + fornecedor.getRazao_social()
+            + "', cnpj = '" + fornecedor.getCnpj()
             + "', telefone ='" + fornecedor.getTelefone()
             + "', logradouro ='" + fornecedor.getLogradouro()
             + "', numero ='" + fornecedor.getNumero()
@@ -119,24 +121,36 @@ public class FornecedorDAO {
     }  
   
     public void insere(Fornecedor fornecedor){  
-        conexao.conectar();  
-        try {
-            conexao.getComando().execute("INSERT INTO Fornecedor (nome, razao_social, cnpj, telefone, logradouro, numero, complemento, cep, cidade, uf) VALUES('" 
-                + fornecedor.getNome() + "', '"
-                + fornecedor.getRazao_social() + "', '"
-                + fornecedor.getCnpj() + "', '"
-                + fornecedor.getTelefone() + "', '"
-                + fornecedor.getLogradouro() + "', '"
-                + fornecedor.getNumero() + "', '"
-                + fornecedor.getComplemento() + "', '"
-                + fornecedor.getCep() + "', '"
-                + fornecedor.getCidade() + "', '"
-                + fornecedor.getUf() + "')"); 
-            System.out.println("Fornecedor inserido com sucesso!");  
-        } catch (SQLException e) {
-            conexao.imprimeErro("Erro ao inserir Fornecedor", e.getMessage());  
-        }finally {  
-            conexao.fechar();  
-        }  
-    }  
+        conexao.conectar();
+        Pattern padrao = Pattern.compile("\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}");
+        Matcher verificaCnpj = padrao.matcher(fornecedor.getCnpj());
+        
+        // Verifica se os campos não estão vazios
+        if((!fornecedor.getCnpj().isEmpty()) && (!fornecedor.getNome().isEmpty()) && (!fornecedor.getRazao_social().isEmpty()) && (!fornecedor.getTelefone().isEmpty()) && (!fornecedor.getLogradouro().isEmpty()) && (!fornecedor.getNumero().isEmpty()) && (!fornecedor.getCep().isEmpty()) && (!fornecedor.getCidade().isEmpty()) && (!fornecedor.getUf().isEmpty())){
+            if(verificaCnpj.matches()){
+                try {
+                    conexao.getComando().execute("INSERT INTO Fornecedor (nome, razao_social, cnpj, telefone, logradouro, numero, complemento, cep, cidade, uf) VALUES('" 
+                        + fornecedor.getNome() + "', '"
+                        + fornecedor.getRazao_social() + "', '"
+                        + fornecedor.getCnpj() + "', '"
+                        + fornecedor.getTelefone() + "', '"
+                        + fornecedor.getLogradouro() + "', '"
+                        + fornecedor.getNumero() + "', '"
+                        + fornecedor.getComplemento() + "', '"
+                        + fornecedor.getCep() + "', '"
+                        + fornecedor.getCidade() + "', '"
+                        + fornecedor.getUf() + "')"); 
+                    System.out.println("Fornecedor inserido com sucesso!");  
+                } catch (SQLException e) {
+                    conexao.imprimeErro("Erro ao inserir Fornecedor", e.getMessage());  
+                }finally {  
+                    conexao.fechar();  
+                }
+            }
+            else{
+                System.out.println("O CNPJ está no formato errado!");
+                System.out.println("Formato esperado: XX.XXX.XXX/XXXX-XX");
+            }
+        }
+    }
 }

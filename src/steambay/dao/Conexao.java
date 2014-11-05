@@ -58,7 +58,7 @@ public class Conexao {
    }  
   
    public void imprimeErro(String msg, String msgErro) {  
-      JOptionPane.showMessageDialog(null, msg, "Erro crítico", 0);  
+      JOptionPane.showMessageDialog(null, msg, "Erro crítico", 0);
       System.err.println(msg);  
       System.out.println(msgErro);  
       System.exit(0);  
