@@ -23,6 +23,12 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
      */
     public CadastrarProdutoUI() {
         initComponents();
+        Vector<Fornecedor> fornList = new Vector<>();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        fornList = fornecedorDAO.buscarTodos();
+        for (int i = 0; i < fornList.size(); i++) {
+            jComboBoxForn.addItem(fornList.get(i).getNome()+", "+fornList.get(i).getCnpj());
+        }
     }
 
     /**
@@ -184,7 +190,6 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxForn.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxForn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFornActionPerformed(evt);
@@ -199,41 +204,35 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNome)
+                                .addGap(169, 169, 169)
+                                .addComponent(jLabelTipo)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxTipo)))
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelEspec)
-                                .addGap(198, 198, 198)
-                                .addComponent(jLabelDesc))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabelNome)
-                                        .addGap(169, 169, 169)
-                                        .addComponent(jLabelTipo)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, Short.MAX_VALUE)
-                                        .addComponent(jCheckBoxTipo)))
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelQtde)
-                                    .addComponent(jTextFieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelTam)
-                                    .addComponent(jTextFieldTam, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabelQtde)
+                            .addComponent(jTextFieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTam)
+                            .addComponent(jTextFieldTam, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelPreco)
                                 .addGap(29, 29, 29)
-                                .addComponent(jLabelFornecedor))
+                                .addComponent(jLabelFornecedor)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxForn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jComboBoxForn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jButtonSearch)
@@ -243,14 +242,18 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                         .addComponent(jButtonDrop)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                         .addComponent(jButtonSave)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCancel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelEspec))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDesc)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -349,7 +352,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         String tFornAux1 = jComboBoxForn.getSelectedItem().toString();
         String[] tFornAux2;
         tFornAux2 = tFornAux1.split(", ");
-        int tForn = Integer.parseInt(fornecedorDAO.buscar(tFornAux2[1]).getCnpj());
+        int tForn = fornecedorDAO.buscarId(tFornAux2[1]);
         if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty()) {
             Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
             JogoDAO jogoDAO = new JogoDAO();
@@ -418,7 +421,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         String tFornAux1 = jComboBoxForn.getSelectedItem().toString();
         String[] tFornAux2;
         tFornAux2 = tFornAux1.split(", ");
-        int tForn = Integer.parseInt(fornecedorDAO.buscar(tFornAux2[1]).getCnpj());
+        int tForn = fornecedorDAO.buscarId(tFornAux2[1]);
         if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty()) {
             Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
             JogoDAO jogoDAO = new JogoDAO();
@@ -428,12 +431,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jComboBoxFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFornActionPerformed
-        Vector<Fornecedor> fornList = new Vector<>();
-        FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        fornList = fornecedorDAO.buscarTodos();
-        for (int i = 0; i < fornList.size(); i++) {
-            jComboBoxForn.addItem(fornList.get(i).getNome()+", "+fornList.get(i).getCnpj());
-        }
+
     }//GEN-LAST:event_jComboBoxFornActionPerformed
 
     /**

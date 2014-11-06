@@ -122,7 +122,7 @@ public class FornecedorDAO {
             return null;  
         }  
   
-    }  
+    }
   
     public void insere(Fornecedor fornecedor){  
         Pattern padrao = Pattern.compile("\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}");
@@ -158,5 +158,22 @@ public class FornecedorDAO {
         }
         else
             JOptionPane.showMessageDialog(null, "Faltam informações para cadastrar o fornecedor!");
+    }
+    
+    public int buscarId (String cnpj) {
+        conexao.conectar();
+        int id = 0;
+        ResultSet rs;
+        try {
+            rs = conexao.getComando().executeQuery("SELECT ID FROM fornecedor WHERE cnpj LIKE '"+cnpj+"';");
+            while (rs.next()){
+                id = rs.getInt("id");
+            }
+            return id;
+        }
+        catch (SQLException e){
+            conexao.imprimeErro("Erro ao buscar fornecedor", e.getMessage());  
+            return -1;
+        }
     }
 }
