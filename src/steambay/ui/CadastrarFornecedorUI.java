@@ -24,6 +24,46 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         initComponents();
         salvar.setEnabled(false);
         remover.setEnabled(false);
+        nome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nome.setText(nome.getText().replaceAll("[0-9]", ""));
+            }
+        });
+        razao_social.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                razao_social.setText(razao_social.getText().replaceAll("[0-9]", ""));
+            }
+        });
+        cnpj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cnpj.setText(cnpj.getText().replaceAll("[^0-9 | ^\\. | ^\\- | ^\\/]", ""));
+            }
+        });
+        telefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                telefone.setText(telefone.getText().replaceAll("[^0-9 | ^\\+ | ^\\( | ^\\) | ^\\- ]", ""));
+            }
+        });
+        numero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                numero.setText(numero.getText().replaceAll("[^0-9]", ""));
+            }
+        });
+        cep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cep.setText(cep.getText().replaceAll("[^0-9 | ^\\- ]", ""));
+            }
+        });
+        cidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cidade.setText(cidade.getText().replaceAll("[0-9]", ""));
+            }
+        });
+        uf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                uf.setText(uf.getText().replaceAll("[0-9]", ""));
+            }
+        });
     }
 
     /**
@@ -60,6 +100,7 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         salvar = new javax.swing.JButton();
         limpar = new javax.swing.JButton();
         remover = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Fornecedor");
@@ -71,11 +112,11 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Nome *");
 
-        jLabel2.setText("Razão Social");
+        jLabel2.setText("Razão Social *");
 
-        jLabel3.setText("CNPJ");
+        jLabel3.setText("CNPJ *");
 
         cnpj.setToolTipText("");
         cnpj.addActionListener(new java.awt.event.ActionListener() {
@@ -84,9 +125,9 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Telefone");
+        jLabel4.setText("Telefone *");
 
-        jLabel5.setText("Logradouro");
+        jLabel5.setText(" Logradouro *");
 
         logradouro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,15 +135,15 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Número");
+        jLabel6.setText("Número *");
 
         jLabel7.setText("Complemento");
 
-        jLabel8.setText("CEP");
+        jLabel8.setText("CEP *");
 
-        jLabel9.setText("Cidade");
+        jLabel9.setText("Cidade *");
 
-        jLabel10.setText("UF");
+        jLabel10.setText("UF *");
 
         cadastrar.setText("Cadastrar");
         cadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,12 +180,75 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("(*) Campos Obrigatórios");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
+<<<<<<< HEAD
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(complemento))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(logradouro))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cnpj)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(razao_social))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel9))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(cadastrar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(limpar)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cidade)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pesquisar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(salvar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(remover))))))
+                .addContainerGap(41, Short.MAX_VALUE))
+=======
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -203,6 +307,7 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(remover)))))
                 .addContainerGap(50, Short.MAX_VALUE))
+>>>>>>> upstream/master
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +344,9 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                     .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cadastrar)
                     .addComponent(pesquisar)
@@ -282,7 +389,7 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         String tcep;
         String tcidade;
         String tuf;
-        
+
         tnome = nome.getText();
         trazao_social = razao_social.getText();
         tcnpj = cnpj.getText();
@@ -297,8 +404,8 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         Pattern padraoCnpj = Pattern.compile("\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}");
         Matcher verificaCnpj = padraoCnpj.matcher(tcnpj);
         //Verifica se os campos não estão vazios
-        if((!tcnpj.isEmpty()) && (!tnome.isEmpty()) && (!trazao_social.isEmpty()) && (!ttelefone.isEmpty()) && (!tlogradouro.isEmpty()) && (!tnumero.isEmpty()) && (!tcep.isEmpty()) && (!tcidade.isEmpty()) && (!tuf.isEmpty())){
-            if(verificaCnpj.matches()){
+        if ((!tcnpj.isEmpty()) && (!tnome.isEmpty()) && (!trazao_social.isEmpty()) && (!ttelefone.isEmpty()) && (!tlogradouro.isEmpty()) && (!tnumero.isEmpty()) && (!tcep.isEmpty()) && (!tcidade.isEmpty()) && (!tuf.isEmpty())) {
+            if (verificaCnpj.matches()) {
                 fornecedor.setNome(tnome);
                 fornecedor.setRazao_social(trazao_social);
                 fornecedor.setCnpj(tcnpj);
@@ -310,34 +417,37 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                 fornecedor.setCidade(tcidade);
                 fornecedor.setUf(tuf);
 
+<<<<<<< HEAD
+                if (fornecedor.getCnpj().length() == 18 && fornecedor.getUf().length() == 2) {
+=======
                 if(fornecedor.getUf().length() == 2){
+>>>>>>> upstream/master
                     acao.insere(fornecedor);
                     JOptionPane.showMessageDialog(logradouro, "Fornecedor cadastrado com sucesso!");
-                }
-                else if(fornecedor.getUf().length() == 2)
+                } else if (fornecedor.getUf().length() == 2) {
                     JOptionPane.showMessageDialog(logradouro, "O CNPJ deve possuir 18 digitos!");
-                else if(fornecedor.getCnpj().length() == 18)
+                } else if (fornecedor.getCnpj().length() == 18) {
                     JOptionPane.showMessageDialog(logradouro, "O UF deve possuir 2 digitos!");
-                else
+                } else {
                     JOptionPane.showMessageDialog(logradouro, "O CNPJ deve possuir 18 digitos e o UF deve possuir 2 digitos!");
-            }
-            else{
+                }
+            } else {
                 JOptionPane.showMessageDialog(logradouro, "O CNPJ está no formato errado!!");
                 JOptionPane.showMessageDialog(logradouro, "Formato esperado: XX.XXX.XXX/XXXX-XX");
             }
-        }
-        else
+        } else {
             JOptionPane.showMessageDialog(logradouro, "Faltam informações para cadastrar o fornecedor!");
+        }
     }//GEN-LAST:event_cadastrarActionPerformed
 
     private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
         Fornecedor fornecedor = new Fornecedor();
         FornecedorDAO acao = new FornecedorDAO();
         String tcnpj;
-        
+
         tcnpj = cnpj.getText();
-        
-        if(acao.buscar(tcnpj).getCnpj() != null){
+
+        if (acao.buscar(tcnpj).getCnpj() != null) {
             salvar.setEnabled(true);
             remover.setEnabled(true);
             fornecedor = acao.buscar(tcnpj);
@@ -352,9 +462,9 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
             cidade.setText(fornecedor.getCidade());
             uf.setText(fornecedor.getUf());
             JOptionPane.showMessageDialog(logradouro, "Fornecedor encontrado!");
-        }
-        else
+        } else {
             JOptionPane.showMessageDialog(logradouro, "Fornecedor não encontrado!");
+        }
     }//GEN-LAST:event_pesquisarActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
@@ -370,7 +480,7 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         String tcep;
         String tcidade;
         String tuf;
-        
+
         tnome = nome.getText();
         trazao_social = razao_social.getText();
         tcnpj = cnpj.getText();
@@ -381,12 +491,12 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         tcep = cep.getText();
         tcidade = cidade.getText();
         tuf = uf.getText();
-        
+
         Pattern padraoCnpj = Pattern.compile("\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}");
         Matcher verificaCnpj = padraoCnpj.matcher(tcnpj);
-        
-        if((!tcnpj.isEmpty()) && (!tnome.isEmpty()) && (!trazao_social.isEmpty()) && (!ttelefone.isEmpty()) && (!tlogradouro.isEmpty()) && (!tnumero.isEmpty()) && (!tcep.isEmpty()) && (!tcidade.isEmpty()) && (!tuf.isEmpty())){
-            if(verificaCnpj.matches()){
+
+        if ((!tcnpj.isEmpty()) && (!tnome.isEmpty()) && (!trazao_social.isEmpty()) && (!ttelefone.isEmpty()) && (!tlogradouro.isEmpty()) && (!tnumero.isEmpty()) && (!tcep.isEmpty()) && (!tcidade.isEmpty()) && (!tuf.isEmpty())) {
+            if (verificaCnpj.matches()) {
                 fornecedor.setNome(tnome);
                 fornecedor.setRazao_social(trazao_social);
                 fornecedor.setCnpj(tcnpj);
@@ -398,13 +508,12 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
                 fornecedor.setCidade(tcidade);
                 fornecedor.setUf(tuf);
 
-                if((acao.buscar(tcnpj).getCnpj() != null) && (JOptionPane.showConfirmDialog(logradouro, "Deseja realmente alterar os dados do Fornecedor de CNPJ: " +tcnpj+ "?")) == 0){
+                if ((acao.buscar(tcnpj).getCnpj() != null) && (JOptionPane.showConfirmDialog(logradouro, "Deseja realmente alterar os dados do Fornecedor de CNPJ: " + tcnpj + "?")) == 0) {
                     salvar.setEnabled(false);
                     acao.atualizar(fornecedor);
                     JOptionPane.showMessageDialog(logradouro, "Fornecedor alterado com sucesso!");
                 }
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(logradouro, "O CNPJ está no formato errado!!");
                 JOptionPane.showMessageDialog(logradouro, "Formato esperado: XX.XXX.XXX/XXXX-XX");
             }
@@ -415,16 +524,15 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         Fornecedor fornecedor = new Fornecedor();
         FornecedorDAO acao = new FornecedorDAO();
         String tcnpj;
-        
+
         tcnpj = cnpj.getText();
-        
-        
-        if((acao.buscar(tcnpj).getCnpj() != null) && (JOptionPane.showConfirmDialog(logradouro, "Deseja realmente remover o Fornecedor de CNPJ: " +tcnpj+ "?")) == 0){
+
+        if ((acao.buscar(tcnpj).getCnpj() != null) && (JOptionPane.showConfirmDialog(logradouro, "Deseja realmente remover o Fornecedor de CNPJ: " + tcnpj + "?")) == 0) {
             remover.setEnabled(false);
             salvar.setEnabled(false);
             acao.apagar(tcnpj);
             JOptionPane.showMessageDialog(logradouro, "Fornecedor removido com sucesso!");
-            }
+        }
     }//GEN-LAST:event_removerActionPerformed
 
     private void logradouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logradouroActionPerformed
@@ -478,6 +586,7 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
     private javax.swing.JTextField complemento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
