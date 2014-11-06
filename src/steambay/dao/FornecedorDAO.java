@@ -37,33 +37,33 @@ public class FornecedorDAO {
         }
     }
 
-//    public Vector<Fornecedor> buscarTodos() {  
-//        conexao.conectar();  
-//        Vector<Fornecedor> resultados = new Vector<Fornecedor>();  
-//        ResultSet rs;  
-//        try {  
-//            rs = conexao.getComando().executeQuery("SELECT * FROM Fornecedor");  
-//            while (rs.next()) {  
-//                Fornecedor temp = new Fornecedor();  
-//            // pega todos os atributos do Fornecedor  
-//                temp.setNome(rs.getString("nome"));
-//                temp.setRazao_social(rs.getString("razao_social"));
-//                temp.setCnpj(rs.getString("cnpj"));
-//                temp.setTelefone(rs.getString("telefone"));
-//                temp.setLogradouro(rs.getString("logradouro"));
-//                temp.setNumero(rs.getString("numero"));
-//                temp.setComplemento(rs.getString("complemento"));
-//                temp.setCep(rs.getString("cep"));
-//                temp.setCidade(rs.getString("cidade"));
-//                temp.setUf(rs.getString("uf"));
-//                resultados.add(temp);  
-//            }  
-//            return resultados;  
-//        } catch (SQLException e) {  
-//            conexao.imprimeErro("Erro ao buscar fornecedores", e.getMessage());  
-//            return null;  
-//        }  
-//    }
+    public Vector<Fornecedor> buscarTodos() {  
+        conexao.conectar();  
+        Vector<Fornecedor> resultados = new Vector<Fornecedor>();  
+        ResultSet rs;  
+        try {  
+            rs = conexao.getComando().executeQuery("SELECT * FROM Fornecedor");  
+            while (rs.next()) {  
+                Fornecedor temp = new Fornecedor();  
+            // pega todos os atributos do Fornecedor  
+                temp.setNome(rs.getString("nome"));
+                temp.setRazao_social(rs.getString("razao_social"));
+                temp.setCnpj(rs.getString("cnpj"));
+                temp.setTelefone(rs.getString("telefone"));
+                temp.setLogradouro(rs.getString("logradouro"));
+                temp.setNumero(rs.getString("numero"));
+                temp.setComplemento(rs.getString("complemento"));
+                temp.setCep(rs.getString("cep"));
+                temp.setCidade(rs.getString("cidade"));
+                temp.setUf(rs.getString("uf"));
+                resultados.add(temp);  
+            }  
+            return resultados;  
+        } catch (SQLException e) {  
+            conexao.imprimeErro("Erro ao buscar fornecedores", e.getMessage());  
+            return null;  
+        }  
+    }
 
     public void atualizar(Fornecedor fornecedor) {  
         conexao.conectar();
