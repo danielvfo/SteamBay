@@ -61,7 +61,7 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabelPreco" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -70,7 +70,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jTextFieldPreco" min="-2" pref="44" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextFieldFornecedor" max="32767" attributes="0"/>
+                              <Component id="jComboBoxForn" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -135,7 +135,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextFieldPreco" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxForn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -319,18 +319,10 @@
     <Component class="javax.swing.JLabel" name="jLabelFornecedor">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="jTextFieldFornecedor"/>
+          <ComponentRef name="default"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Fornecedor"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldFornecedor">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Digite o ID do fornecedor."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFornecedorActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSearch">
       <Properties>
@@ -366,6 +358,21 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonUpdateActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxForn">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFornActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

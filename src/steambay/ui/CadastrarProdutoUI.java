@@ -5,8 +5,11 @@
  */
 package steambay.ui;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import steambay.dao.FornecedorDAO;
 import steambay.dao.JogoDAO;
+import steambay.entity.Fornecedor;
 import steambay.entity.Jogo;
 
 /**
@@ -50,11 +53,11 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         jButtonSave = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         jLabelFornecedor = new javax.swing.JLabel();
-        jTextFieldFornecedor = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jButtonDrop = new javax.swing.JButton();
         jButtonClean = new javax.swing.JButton();
         jButtonUpdate = new javax.swing.JButton();
+        jComboBoxForn = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -147,15 +150,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
             }
         });
 
-        jLabelFornecedor.setLabelFor(jTextFieldFornecedor);
         jLabelFornecedor.setText("Fornecedor");
-
-        jTextFieldFornecedor.setToolTipText("Digite o ID do fornecedor.");
-        jTextFieldFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldFornecedorActionPerformed(evt);
-            }
-        });
 
         jButtonSearch.setText("Buscar");
         jButtonSearch.setToolTipText("Busca um jogo no banco de dados baseado no nome inserido.");
@@ -186,6 +181,13 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonUpdateActionPerformed(evt);
+            }
+        });
+
+        jComboBoxForn.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxForn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFornActionPerformed(evt);
             }
         });
 
@@ -222,7 +224,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                                     .addComponent(jLabelTam)
                                     .addComponent(jTextFieldTam, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelPreco)
                                 .addGap(29, 29, 29)
@@ -230,7 +232,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldFornecedor)))
+                                .addComponent(jComboBoxForn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -280,7 +282,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jComboBoxForn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEspec)
@@ -335,6 +337,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         String tNome = jTextFieldNome.getText();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
         boolean tTipo = jCheckBoxTipo.isSelected();
         int tQtde = 0;
         if (tTipo)
@@ -343,8 +346,11 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         float tPreco = Float.parseFloat(jTextFieldPreco.getText().trim());
         String tEsp = jTextAreaEspec.getText();
         String tDesc = jTextAreaDesc.getText();
-        int tForn = Integer.parseInt(jTextFieldFornecedor.getText().trim());
-        if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty() && !jTextFieldFornecedor.getText().isEmpty()) {
+        String tFornAux1 = jComboBoxForn.getSelectedItem().toString();
+        String[] tFornAux2;
+        tFornAux2 = tFornAux1.split(", ");
+        int tForn = Integer.parseInt(fornecedorDAO.buscar(tFornAux2[1]).getCnpj());
+        if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty()) {
             Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
             JogoDAO jogoDAO = new JogoDAO();
             if (jogoDAO.buscar(tNome).size() < 1){
@@ -358,10 +364,6 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
-    private void jTextFieldFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldFornecedorActionPerformed
-
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         Jogo tJogo;
         JogoDAO jogoDAO = new JogoDAO();
@@ -370,7 +372,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                 tJogo = jogoDAO.buscar(jTextFieldNome.getText()).get(0);
                 jTextAreaDesc.setText(tJogo.getDescricao());
                 jTextAreaEspec.setText(tJogo.getEspecificacao());
-                jTextFieldFornecedor.setText(String.valueOf(tJogo.getFornecedor()));
+                jComboBoxFornActionPerformed(evt);
                 jTextFieldNome.setText(tJogo.getNome());
                 jTextFieldPreco.setText(String.valueOf(tJogo.getPreco()));
                 if (tJogo.isTipo() != jCheckBoxTipo.isSelected())
@@ -393,7 +395,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
         jTextAreaDesc.setText("");
         jTextAreaEspec.setText("");
-        jTextFieldFornecedor.setText("");
+        jComboBoxForn.removeAllItems();
         jTextFieldNome.setText("");
         jTextFieldPreco.setText("");
         if (jCheckBoxTipo.isSelected())
@@ -404,6 +406,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         String tNome = jTextFieldNome.getText();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
         boolean tTipo = jCheckBoxTipo.isSelected();
         int tQtde = 0;
         if (tTipo)
@@ -412,14 +415,26 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         float tPreco = Float.parseFloat(jTextFieldPreco.getText().trim());
         String tEsp = jTextAreaEspec.getText();
         String tDesc = jTextAreaDesc.getText();
-        int tForn = Integer.parseInt(jTextFieldFornecedor.getText().trim());
-        if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty() && !jTextFieldFornecedor.getText().isEmpty()) {
+        String tFornAux1 = jComboBoxForn.getSelectedItem().toString();
+        String[] tFornAux2;
+        tFornAux2 = tFornAux1.split(", ");
+        int tForn = Integer.parseInt(fornecedorDAO.buscar(tFornAux2[1]).getCnpj());
+        if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty()) {
             Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
             JogoDAO jogoDAO = new JogoDAO();
             if (jogoDAO.buscar(tNome).size() > 0)
                     jogoDAO.atualizar(tJogo);
         }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jComboBoxFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFornActionPerformed
+        Vector<Fornecedor> fornList = new Vector<>();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        fornList = fornecedorDAO.buscarTodos();
+        for (int i = 0; i < fornList.size(); i++) {
+            jComboBoxForn.addItem(fornList.get(i).getNome()+", "+fornList.get(i).getCnpj());
+        }
+    }//GEN-LAST:event_jComboBoxFornActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,6 +479,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JCheckBox jCheckBoxTipo;
+    private javax.swing.JComboBox jComboBoxForn;
     private javax.swing.JLabel jLabelDesc;
     private javax.swing.JLabel jLabelEspec;
     private javax.swing.JLabel jLabelFornecedor;
@@ -476,7 +492,6 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextAreaDesc;
     private javax.swing.JTextArea jTextAreaEspec;
-    private javax.swing.JTextField jTextFieldFornecedor;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPreco;
     private javax.swing.JTextField jTextFieldQtde;
