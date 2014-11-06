@@ -5,13 +5,12 @@
  */
 package steambay.dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import steambay.entity.Fornecedor;
 
 /**
@@ -27,7 +26,7 @@ public class FornecedorDAO {
         try{
             conexao.getComando()
                 .executeUpdate("DELETE FROM Fornecedor WHERE cnpj = '" + cnpj + "';");
-            System.out.println("Fornecedor de CNPJ = " + cnpj + " removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Fornecedor de CNPJ = " + cnpj + " removido com sucesso!");
         }
         catch(SQLException e){
             conexao.imprimeErro("Erro ao apagar Fornecedor", e.getMessage());
@@ -66,33 +65,38 @@ public class FornecedorDAO {
     }
 
     public void atualizar(Fornecedor fornecedor) {  
-        conexao.conectar();
-        String com = "UPDATE Fornecedor SET nome = '" + fornecedor.getNome()
-            + "', razao_social ='" + fornecedor.getRazao_social()
-            + "', cnpj = '" + fornecedor.getCnpj()
-            + "', telefone ='" + fornecedor.getTelefone()
-            + "', logradouro ='" + fornecedor.getLogradouro()
-            + "', numero ='" + fornecedor.getNumero()
-            + "', complemento ='" + fornecedor.getComplemento()
-            + "', cep ='" + fornecedor.getCep()
-            + "', cidade ='" + fornecedor.getCidade()
-            + "', uf ='" + fornecedor.getUf()
-            + "' WHERE  cnpj = '" + fornecedor.getCnpj() + "';";  
-        System.out.println("Fornecedor de CNPJ = " + fornecedor.getCnpj() + " atualizado com sucesso!");  
-        try {  
-            conexao.getComando().executeUpdate(com);  
-        } catch (SQLException e) {  
-            e.printStackTrace();  
-        } finally {  
-            conexao.fechar();  
-        }  
+        if((JOptionPane.showConfirmDialog(null, "Deseja realmente alterar os dados do Fornecedor de CNPJ: " + fornecedor.getCnpj() + "?")) == 0)
+            if((!fornecedor.getCnpj().isEmpty()) && (!fornecedor.getNome().isEmpty()) && (!fornecedor.getRazao_social().isEmpty()) && (!fornecedor.getTelefone().isEmpty()) && (!fornecedor.getLogradouro().isEmpty()) && (!fornecedor.getNumero().isEmpty()) && (!fornecedor.getCep().isEmpty()) && (!fornecedor.getCidade().isEmpty()) && (!fornecedor.getUf().isEmpty())){
+                conexao.conectar();
+                String com = "UPDATE Fornecedor SET nome = '" + fornecedor.getNome()
+                    + "', razao_social ='" + fornecedor.getRazao_social()
+                    + "', cnpj = '" + fornecedor.getCnpj()
+                    + "', telefone ='" + fornecedor.getTelefone()
+                    + "', logradouro ='" + fornecedor.getLogradouro()
+                    + "', numero ='" + fornecedor.getNumero()
+                    + "', complemento ='" + fornecedor.getComplemento()
+                    + "', cep ='" + fornecedor.getCep()
+                    + "', cidade ='" + fornecedor.getCidade()
+                    + "', uf ='" + fornecedor.getUf()
+                    + "' WHERE  cnpj = '" + fornecedor.getCnpj() + "';";  
+                JOptionPane.showMessageDialog(null, "Fornecedor de CNPJ = " + fornecedor.getCnpj() + " atualizado com sucesso!");
+                try {  
+                    conexao.getComando().executeUpdate(com);  
+                } catch (SQLException e) {  
+                    e.printStackTrace();  
+                } finally {  
+                    conexao.fechar();  
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Faltam informações para atualizar o fornecedor!");
     }  
   
     public Fornecedor buscar(String cnpj) {  
         conexao.conectar(); 
         Fornecedor resultados = new Fornecedor();
         //Vector<Fornecedor> resultados = new Vector<Fornecedor>();  
-        ResultSet rs;  
+        ResultSet rs;
         try {  
             rs = conexao.getComando().executeQuery("SELECT * FROM Fornecedor WHERE cnpj LIKE '"  
                 + cnpj + "';");  
@@ -121,13 +125,13 @@ public class FornecedorDAO {
     }  
   
     public void insere(Fornecedor fornecedor){  
-        conexao.conectar();
         Pattern padrao = Pattern.compile("\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}");
         Matcher verificaCnpj = padrao.matcher(fornecedor.getCnpj());
         
         // Verifica se os campos não estão vazios
         if((!fornecedor.getCnpj().isEmpty()) && (!fornecedor.getNome().isEmpty()) && (!fornecedor.getRazao_social().isEmpty()) && (!fornecedor.getTelefone().isEmpty()) && (!fornecedor.getLogradouro().isEmpty()) && (!fornecedor.getNumero().isEmpty()) && (!fornecedor.getCep().isEmpty()) && (!fornecedor.getCidade().isEmpty()) && (!fornecedor.getUf().isEmpty())){
             if(verificaCnpj.matches()){
+                conexao.conectar();
                 try {
                     conexao.getComando().execute("INSERT INTO Fornecedor (nome, razao_social, cnpj, telefone, logradouro, numero, complemento, cep, cidade, uf) VALUES('" 
                         + fornecedor.getNome() + "', '"
@@ -139,8 +143,8 @@ public class FornecedorDAO {
                         + fornecedor.getComplemento() + "', '"
                         + fornecedor.getCep() + "', '"
                         + fornecedor.getCidade() + "', '"
-                        + fornecedor.getUf() + "')"); 
-                    System.out.println("Fornecedor inserido com sucesso!");  
+                        + fornecedor.getUf() + "')");
+                    JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso!");
                 } catch (SQLException e) {
                     conexao.imprimeErro("Erro ao inserir Fornecedor", e.getMessage());  
                 }finally {  
@@ -148,9 +152,11 @@ public class FornecedorDAO {
                 }
             }
             else{
-                System.out.println("O CNPJ está no formato errado!");
-                System.out.println("Formato esperado: XX.XXX.XXX/XXXX-XX");
+                JOptionPane.showMessageDialog(null, "O CNPJ está no formato errado!");
+                JOptionPane.showMessageDialog(null, "Formato esperado: XX.XXX.XXX/XXXX-XX");
             }
         }
+        else
+            JOptionPane.showMessageDialog(null, "Faltam informações para cadastrar o fornecedor!");
     }
 }
