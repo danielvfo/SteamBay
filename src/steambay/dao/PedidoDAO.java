@@ -67,17 +67,21 @@ public class PedidoDAO {
         conexao.fechar();
     }
 
-    public void inserePedido(Pedido pedido) {
+    public void inserePedido(Pedido pedido) throws Exception {
         conexao.conectar();
-        try {
-            conexao.getComando().execute("INSERT INTO pedido (quantidade, total) VALUES("
-                    + pedido.getQuantidade() + ", "
-                    + pedido.getTotal() + ")");
-            System.out.println("Pedido inserido com sucesso!");
-        } catch (SQLException e) {
-            conexao.imprimeErro("Erro ao inserir pedido!", e.getMessage());
-        } finally {
-            conexao.fechar();
+        if (pedido.getTotal() >= 0) {
+            try {
+                conexao.getComando().execute("INSERT INTO pedido (quantidade, total) VALUES("
+                        + pedido.getQuantidade() + ", "
+                        + pedido.getTotal() + ")");
+                System.out.println("Pedido inserido com sucesso!");
+            } catch (SQLException e) {
+                conexao.imprimeErro("Erro ao inserir pedido!", e.getMessage());
+            } finally {
+                conexao.fechar();
+            }
+        } else {
+            throw new Exception("Erro! Valor do pedido negativo!");
         }
     }
 
@@ -94,19 +98,17 @@ public class PedidoDAO {
             conexao.fechar();
         }
     }
-    
-    public void apagar(int id){
+
+    public void apagar(int id) {
         conexao.conectar();
-        try{
+        try {
             conexao.getComando().executeUpdate("DELETE FROM jogo_pedido WHERE pedido_id = " + id + ";");
             conexao.getComando().executeUpdate("DELETE FROM pedido WHERE id = " + id + ";");
             System.out.println("Pedido de id = " + id + " removido com sucesso!");
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             conexao.imprimeErro("Erro ao apagar pedido ", e.getMessage());
-        }
-        finally{
+        } finally {
             conexao.fechar();
         }
-    }    
+    }
 }
