@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;  
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import steambay.entity.Jogo;
 /**
  *
@@ -60,6 +61,7 @@ public class JogoDAO {
                + jogo.getDescricao() + "', "
                + jogo.getFornecedor() + ")");
             System.out.println("Inserido!");
+            JOptionPane.showMessageDialog(null, "Jogo cadastrado com sucesso!");
          }
       } catch (SQLException e) {
          connct.imprimeErro("Erro ao inserir Jogo", e.getMessage());
@@ -74,6 +76,7 @@ public class JogoDAO {
          connct.getComando()  
                .execute("DELETE FROM jogo WHERE nome LIKE '"  
                  + nome + "';");
+         JOptionPane.showMessageDialog(null, "Jogo apagado com sucesso!");
       } catch (SQLException e) {
          connct.imprimeErro("Erro ao apagar jogo", e.getMessage());
       } finally {
@@ -94,6 +97,7 @@ public class JogoDAO {
               + "', fornecedor_id = " + jogo.getFornecedor()
               + " WHERE  nome LIKE '" + jogo.getNome() + "';";  
         System.out.println("Atualizada!");
+        JOptionPane.showMessageDialog(null, "Jogo atualizado com sucesso!");
         try {  
            connct.getComando().executeUpdate(com);  
         } catch (SQLException e) {  

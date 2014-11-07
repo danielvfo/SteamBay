@@ -176,4 +176,36 @@ public class FornecedorDAO {
             return -1;
         }
     }
+    
+    public Fornecedor buscarPorId(int id) {  
+        conexao.conectar(); 
+        Fornecedor resultados = new Fornecedor();
+        //Vector<Fornecedor> resultados = new Vector<Fornecedor>();  
+        ResultSet rs;
+        try {  
+            rs = conexao.getComando().executeQuery("SELECT * FROM Fornecedor WHERE id = "  
+                + id + ";");  
+            while (rs.next()) {
+                Fornecedor temp = new Fornecedor();  
+            // pega todos os atributos do Fornecedor  
+                temp.setNome(rs.getString("nome"));
+                temp.setRazao_social(rs.getString("razao_social"));
+                temp.setCnpj(rs.getString("cnpj"));
+                temp.setTelefone(rs.getString("telefone"));
+                temp.setLogradouro(rs.getString("logradouro"));
+                temp.setNumero(rs.getString("numero"));
+                temp.setComplemento(rs.getString("complemento"));
+                temp.setCep(rs.getString("cep"));
+                temp.setCidade(rs.getString("cidade"));
+                temp.setUf(rs.getString("uf")); 
+                //resultados.add(temp);
+                resultados = temp;
+            }
+            return resultados;
+        } catch (SQLException e) {  
+            conexao.imprimeErro("Erro ao buscar fornecedor", e.getMessage());  
+            return null;  
+        }  
+  
+    }
 }
