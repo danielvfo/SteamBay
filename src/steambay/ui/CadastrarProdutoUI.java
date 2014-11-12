@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package steambay.ui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -28,7 +31,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornList = fornecedorDAO.buscarTodos();
         for (int i = 0; i < fornList.size(); i++) {
-            jComboBoxForn.addItem(fornList.get(i).getNome()+", "+fornList.get(i).getCnpj());
+            jComboBoxForn.addItem(fornList.get(i).getNome() + ", " + fornList.get(i).getCnpj());
         }
     }
 
@@ -322,8 +325,8 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldPrecoActionPerformed
 
     private void jTextFieldQtdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtdeKeyTyped
-        String nums="0987654321";
-        if(!nums.contains(evt.getKeyChar()+"")){
+        String nums = "0987654321";
+        if (!nums.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldQtdeKeyTyped
@@ -332,8 +335,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         if (jCheckBoxTipo.isSelected()) {
             jLabelQtde.setEnabled(true);
             jTextFieldQtde.setEnabled(true);
-        }
-        else {
+        } else {
             jLabelQtde.setEnabled(false);
             jTextFieldQtde.setEnabled(false);
         }
@@ -344,8 +346,9 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         boolean tTipo = jCheckBoxTipo.isSelected();
         int tQtde = 0;
-        if (tTipo)
+        if (tTipo) {
             tQtde = Integer.parseInt(jTextFieldQtde.getText().trim());
+        }
         String tTamanho = jTextFieldTam.getText();
         float tPreco = Float.parseFloat(jTextFieldPreco.getText().trim());
         String tEsp = jTextAreaEspec.getText();
@@ -357,7 +360,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty()) {
             Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
             JogoDAO jogoDAO = new JogoDAO();
-            if (jogoDAO.buscar(tNome).size() < 1){
+            if (jogoDAO.buscar(tNome).size() < 1) {
                 jogoDAO.insere(tJogo);
             }
         }
@@ -372,30 +375,60 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         JogoDAO jogoDAO = new JogoDAO();
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         Fornecedor tForn;
-        if (!jTextFieldNome.getText().isEmpty())
+        if (!jTextFieldNome.getText().isEmpty()) {
             if (jogoDAO.buscar(jTextFieldNome.getText()).size() > 0) {
                 tJogo = jogoDAO.buscar(jTextFieldNome.getText()).get(0);
                 tForn = fornecedorDAO.buscarPorId(tJogo.getFornecedor());
                 jTextAreaDesc.setText(tJogo.getDescricao());
                 jTextAreaEspec.setText(tJogo.getEspecificacao());
-                jComboBoxForn.setSelectedItem(tForn.getNome()+", "+tForn.getCnpj());
+                jComboBoxForn.setSelectedItem(tForn.getNome() + ", " + tForn.getCnpj());
                 jTextFieldNome.setText(tJogo.getNome());
                 jTextFieldPreco.setText(String.valueOf(tJogo.getPreco()));
-                if (tJogo.isTipo() != jCheckBoxTipo.isSelected())
+                if (tJogo.isTipo() != jCheckBoxTipo.isSelected()) {
                     jCheckBoxTipo.doClick();
-                if (tJogo.isTipo())
+                }
+                if (tJogo.isTipo()) {
                     jTextFieldQtde.setText(String.valueOf(tJogo.getQtde()));
+                }
                 jTextFieldTam.setText(tJogo.getTamanho());
             }
-        
+        }
+
     }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    public void jButtonSearchActionPerformed() {
+        Jogo tJogo;
+        JogoDAO jogoDAO = new JogoDAO();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        Fornecedor tForn;
+        if (!jTextFieldNome.getText().isEmpty()) {
+            if (jogoDAO.buscar(jTextFieldNome.getText()).size() > 0) {
+                tJogo = jogoDAO.buscar(jTextFieldNome.getText()).get(0);
+                tForn = fornecedorDAO.buscarPorId(tJogo.getFornecedor());
+                jTextAreaDesc.setText(tJogo.getDescricao());
+                jTextAreaEspec.setText(tJogo.getEspecificacao());
+                jComboBoxForn.setSelectedItem(tForn.getNome() + ", " + tForn.getCnpj());
+                jTextFieldNome.setText(tJogo.getNome());
+                jTextFieldPreco.setText(String.valueOf(tJogo.getPreco()));
+                if (tJogo.isTipo() != jCheckBoxTipo.isSelected()) {
+                    jCheckBoxTipo.doClick();
+                }
+                if (tJogo.isTipo()) {
+                    jTextFieldQtde.setText(String.valueOf(tJogo.getQtde()));
+                }
+                jTextFieldTam.setText(tJogo.getTamanho());
+            }
+        }
+    }
 
     private void jButtonDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDropActionPerformed
         JogoDAO jogoDAO = new JogoDAO();
         String tNome = jTextFieldNome.getText();
-        if (!jTextFieldNome.getText().isEmpty())
-            if (jogoDAO.buscar(tNome).size() > 0)
+        if (!jTextFieldNome.getText().isEmpty()) {
+            if (jogoDAO.buscar(tNome).size() > 0) {
                 jogoDAO.apagar(tNome);
+            }
+        }
     }//GEN-LAST:event_jButtonDropActionPerformed
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
@@ -404,15 +437,16 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         jComboBoxForn.removeAllItems();
         jTextFieldNome.setText("");
         jTextFieldPreco.setText("");
-        if (jCheckBoxTipo.isSelected())
+        if (jCheckBoxTipo.isSelected()) {
             jCheckBoxTipo.doClick();
+        }
         jTextFieldQtde.setText("");
         jTextFieldTam.setText("");
         Vector<Fornecedor> fornList = new Vector<>();
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornList = fornecedorDAO.buscarTodos();
         for (int i = 0; i < fornList.size(); i++) {
-            jComboBoxForn.addItem(fornList.get(i).getNome()+", "+fornList.get(i).getCnpj());
+            jComboBoxForn.addItem(fornList.get(i).getNome() + ", " + fornList.get(i).getCnpj());
         }
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
@@ -421,8 +455,9 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         boolean tTipo = jCheckBoxTipo.isSelected();
         int tQtde = 0;
-        if (tTipo)
+        if (tTipo) {
             tQtde = Integer.parseInt(jTextFieldQtde.getText().trim());
+        }
         String tTamanho = jTextFieldTam.getText();
         float tPreco = Float.parseFloat(jTextFieldPreco.getText().trim());
         String tEsp = jTextAreaEspec.getText();
@@ -434,8 +469,9 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         if (!tNome.isEmpty() && !tTamanho.isEmpty() && !jTextFieldPreco.getText().isEmpty() && !tEsp.isEmpty() && !tDesc.isEmpty()) {
             Jogo tJogo = new Jogo(tNome, tTipo, tQtde, tTamanho, tPreco, tEsp, tDesc, tForn);
             JogoDAO jogoDAO = new JogoDAO();
-            if (jogoDAO.buscar(tNome).size() > 0)
-                    jogoDAO.atualizar(tJogo);
+            if (jogoDAO.buscar(tNome).size() > 0) {
+                jogoDAO.atualizar(tJogo);
+            }
         }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
@@ -505,7 +541,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTam;
     // End of variables declaration//GEN-END:variables
 
-    public void setjTextFieldNome(JTextField jTextFieldNome) {
-        this.jTextFieldNome = jTextFieldNome;
+    public void setjTextFieldNome(String texto) {
+        jTextFieldNome.setText(texto);
     }
 }

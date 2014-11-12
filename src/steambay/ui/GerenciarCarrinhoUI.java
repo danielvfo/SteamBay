@@ -5,6 +5,7 @@
  */
 package steambay.ui;
 
+import java.awt.event.ActionEvent;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
     private String string;
     private String[] parts;
     NumberFormat formatter = new DecimalFormat("#0.00");
-
+    CadastrarProdutoUI jogo = new CadastrarProdutoUI();
+    
     public GerenciarCarrinhoUI() {
         initComponents();
     }
@@ -312,10 +314,12 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        CadastrarProdutoUI jogo = new CadastrarProdutoUI();
+        int linha;
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         jogo.setVisible(true);
-        //jogo.jTextFieldNome.setText(String.valueOf(model.getValueAt(i, 4)));
+        linha = jTable1.getSelectedRow();
+        jogo.setjTextFieldNome(String.valueOf(model.getValueAt(linha, 1)));
+        jogo.jButtonSearchActionPerformed();
     }//GEN-LAST:event_jTable1MouseClicked
     /**
      * @param args the command line arguments

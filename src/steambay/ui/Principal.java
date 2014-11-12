@@ -21,6 +21,11 @@ public class Principal extends javax.swing.JFrame {
         this.setExtendedState(this.getExtendedState() | javax.swing.JFrame.MAXIMIZED_BOTH);
         initComponents();
     }
+    CadastrarFornecedorUI cdfui = new CadastrarFornecedorUI();
+    CadastrarProdutoUI cdpui = new CadastrarProdutoUI();
+    GerenciarPedidoUI grpeui = new GerenciarPedidoUI();
+    GerenciarCarrinhoUI grcaui = new GerenciarCarrinhoUI();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,22 +141,18 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void GerFornecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerFornecActionPerformed
-        CadastrarFornecedorUI cdfui = new CadastrarFornecedorUI();
         cdfui.setVisible(true);
     }//GEN-LAST:event_GerFornecActionPerformed
 
     private void GerJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerJogoActionPerformed
-        CadastrarProdutoUI cdpui = new CadastrarProdutoUI();
         cdpui.setVisible(true);
     }//GEN-LAST:event_GerJogoActionPerformed
 
     private void GerPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerPedActionPerformed
-        GerenciarPedidoUI grpeui = new GerenciarPedidoUI();
         grpeui.setVisible(true);
     }//GEN-LAST:event_GerPedActionPerformed
 
     private void GerCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerCarActionPerformed
-        GerenciarCarrinhoUI grcaui = new GerenciarCarrinhoUI();
         grcaui.setVisible(true);
     }//GEN-LAST:event_GerCarActionPerformed
 

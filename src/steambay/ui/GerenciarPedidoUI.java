@@ -50,7 +50,6 @@ public class GerenciarPedidoUI extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Pedidos");
         setResizable(false);
 
