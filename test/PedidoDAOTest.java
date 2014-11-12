@@ -39,26 +39,22 @@ public class PedidoDAOTest {
         int idPedAnt;
         Pedido tPedido = new Pedido(2, 35.00);
         PedidoDAO pedidoDAO = new PedidoDAO();
-        
-        idPedAnt = pedidoDAO.buscarPedido();
+        idPedAnt = pedidoDAO.buscarPedidoRecente();
         try{
             pedidoDAO.inserePedido(tPedido);
         }
         catch (Exception e){
             assertTrue(false);
         }
-        pedidoDAO.insereJogoPedido(2, pedidoDAO.buscarPedido());
-        
-        assertFalse(idPedAnt == pedidoDAO.buscarPedido());
-        
-        pedidoDAO.apagar(pedidoDAO.buscarPedido());
+        pedidoDAO.insereJogoPedido(2, pedidoDAO.buscarPedidoRecente());
+        assertFalse(idPedAnt == pedidoDAO.buscarPedidoRecente());
+        pedidoDAO.apagar(pedidoDAO.buscarPedidoRecente());
     }
     
     @Test
     public void inserirInvalidoTest(){
         Pedido tPedido = new Pedido(2, -35.00);
         PedidoDAO pedidoDAO = new PedidoDAO();
-        
         try{
             pedidoDAO.inserePedido(tPedido);
             assertTrue(false);

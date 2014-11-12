@@ -8,6 +8,7 @@ package steambay.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import steambay.entity.Jogo;
 import steambay.entity.Pedido;
 
@@ -45,7 +46,7 @@ public class PedidoDAO {
         }
     }
 
-    public int buscarPedido() {
+    public int buscarPedidoRecente() {
         conexao.conectar();
         Pedido temp = new Pedido();
         int resultado = 0;
@@ -63,6 +64,32 @@ public class PedidoDAO {
         }
     }
 
+    public ArrayList<Jogo> buscarPedidoItens(int id) {
+        conexao.conectar();
+        ArrayList<Jogo> resultados = new ArrayList<>();
+        ResultSet rs;
+        try {
+            rs = conexao.getComando().executeQuery("select b.nome, b.preco, b.tipo, b.id"
+                    + " from pedido as a"
+                    + " inner join jogo_pedido as c on a.id = c.Pedido_id"
+                    + " inner join jogo as b on c.Jogo_id = b.id"
+                    + " where a.id = "
+                    + id + ";");
+            while (rs.next()) {
+                Jogo tempJ = new Jogo();
+                tempJ.setNome(rs.getString("nome"));
+                tempJ.setPreco(rs.getFloat("preco"));
+                tempJ.setTipo(rs.getBoolean("tipo"));
+                tempJ.setId(rs.getInt("id"));
+                resultados.add(tempJ);
+            }
+            return resultados;
+        } catch (SQLException e) {
+            conexao.imprimeErro("Erro ao buscar jogo!", e.getMessage());
+            return null;
+        }
+    }
+
     public void fechaConexao() {
         conexao.fechar();
     }
@@ -75,6 +102,7 @@ public class PedidoDAO {
                         + pedido.getQuantidade() + ", "
                         + pedido.getTotal() + ")");
                 System.out.println("Pedido inserido com sucesso!");
+                JOptionPane.showMessageDialog(null, "Pedido inserido com sucesso!");
             } catch (SQLException e) {
                 conexao.imprimeErro("Erro ao inserir pedido!", e.getMessage());
             } finally {
@@ -102,9 +130,12 @@ public class PedidoDAO {
     public void apagar(int id) {
         conexao.conectar();
         try {
-            conexao.getComando().executeUpdate("DELETE FROM jogo_pedido WHERE pedido_id = " + id + ";");
-            conexao.getComando().executeUpdate("DELETE FROM pedido WHERE id = " + id + ";");
-            System.out.println("Pedido de id = " + id + " removido com sucesso!");
+            if (JOptionPane.showConfirmDialog(null, "Deseja excluir o pedido?") == 0) {
+                conexao.getComando().executeUpdate("DELETE FROM jogo_pedido WHERE pedido_id = " + id + ";");
+                conexao.getComando().executeUpdate("DELETE FROM pedido WHERE id = " + id + ";");             
+                System.out.println("Pedido de id = " + id + " removido com sucesso!");
+                JOptionPane.showMessageDialog(null, "Pedido de id = " + id + " removido com sucesso!");
+            }           
         } catch (SQLException e) {
             conexao.imprimeErro("Erro ao apagar pedido ", e.getMessage());
         } finally {

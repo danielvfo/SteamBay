@@ -101,9 +101,14 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
                 jTable1ComponentRemoved(evt);
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("Valor Total:");
+        jLabel2.setText("Valor total:");
 
         jTextField2.setEditable(false);
 
@@ -152,7 +157,7 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(0, 484, Short.MAX_VALUE))
+                        .addGap(0, 486, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -298,13 +303,20 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao finalizar peidido.");
         }
-        idPedido = pedidodao.buscarPedido();
+        idPedido = pedidodao.buscarPedidoRecente();
         for (int i = 0; i < model.getRowCount(); i++) {
             pedidodao.insereJogoPedido(Integer.parseInt(String.valueOf(model.getValueAt(i, 4))), idPedido);
         }
         JOptionPane.showMessageDialog(jTable1, "Pedido finalizado com sucesso!");
         jButton3.setEnabled(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        CadastrarProdutoUI jogo = new CadastrarProdutoUI();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        jogo.setVisible(true);
+        //jogo.jTextFieldNome.setText(String.valueOf(model.getValueAt(i, 4)));
+    }//GEN-LAST:event_jTable1MouseClicked
     /**
      * @param args the command line arguments
      */
