@@ -7,7 +7,7 @@ package steambay.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -36,9 +36,9 @@ public class FornecedorDAO {
         }
     }
 
-    public Vector<Fornecedor> buscarTodos() {  
+    public ArrayList<Fornecedor> buscarTodos() {  
         conexao.conectar();  
-        Vector<Fornecedor> resultados = new Vector<Fornecedor>();  
+        ArrayList<Fornecedor> resultados = new ArrayList<Fornecedor>();  
         ResultSet rs;  
         try {  
             rs = conexao.getComando().executeQuery("SELECT * FROM Fornecedor");  
@@ -88,8 +88,28 @@ public class FornecedorDAO {
                     conexao.fechar();  
                 }
             }
-            else
-                JOptionPane.showMessageDialog(null, "Faltam informações para atualizar o fornecedor!");
+            else{
+                ArrayList<String> informacoes = new ArrayList<> ();
+                if(fornecedor.getNome().isEmpty())
+                    informacoes.add("Nome");
+                if(fornecedor.getRazao_social().isEmpty())
+                    informacoes.add("Razão Social");
+                if(fornecedor.getCnpj().isEmpty())
+                    informacoes.add("CNPJ");
+                if(fornecedor.getTelefone().isEmpty())
+                    informacoes.add("Telefone");
+                if(fornecedor.getLogradouro().isEmpty())
+                    informacoes.add("Logradouro");
+                if(fornecedor.getNumero().isEmpty())
+                    informacoes.add("Número");
+                if(fornecedor.getCep().isEmpty())
+                    informacoes.add("Cep");
+                if(fornecedor.getCidade().isEmpty())
+                    informacoes.add("Cidade");
+                if(fornecedor.getUf().isEmpty())
+                    informacoes.add("UF");
+                JOptionPane.showMessageDialog(null, "Faltam informações para cadastrar o fornecedor! "+ informacoes);
+        }
     }  
   
     public Fornecedor buscar(String cnpj) {  
@@ -156,8 +176,28 @@ public class FornecedorDAO {
                 JOptionPane.showMessageDialog(null, "Formato esperado: XX.XXX.XXX/XXXX-XX");
             }
         }
-        else
-            JOptionPane.showMessageDialog(null, "Faltam informações para cadastrar o fornecedor!");
+        else{
+            ArrayList<String> informacoes = new ArrayList<> ();
+            if(fornecedor.getNome().isEmpty())
+                informacoes.add("Nome");
+            if(fornecedor.getRazao_social().isEmpty())
+                informacoes.add("Razão Social");
+            if(fornecedor.getCnpj().isEmpty())
+                informacoes.add("CNPJ");
+            if(fornecedor.getTelefone().isEmpty())
+                informacoes.add("Telefone");
+            if(fornecedor.getLogradouro().isEmpty())
+                informacoes.add("Logradouro");
+            if(fornecedor.getNumero().isEmpty())
+                informacoes.add("Número");
+            if(fornecedor.getCep().isEmpty())
+                informacoes.add("Cep");
+            if(fornecedor.getCidade().isEmpty())
+                informacoes.add("Cidade");
+            if(fornecedor.getUf().isEmpty())
+                informacoes.add("UF");
+            JOptionPane.showMessageDialog(null, "Faltam informações para cadastrar o fornecedor! "+ informacoes);
+        }
     }
     
     public int buscarId (String cnpj) {
