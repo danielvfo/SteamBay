@@ -5,6 +5,7 @@
  */
 package steambay.ui;
 
+import java.awt.Frame;
 import java.awt.event.WindowEvent;
 
 /**
@@ -17,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
+        this.setExtendedState(this.getExtendedState() | javax.swing.JFrame.MAXIMIZED_BOTH);
         initComponents();
     }
     /**
@@ -38,12 +40,17 @@ public class Principal extends javax.swing.JFrame {
         GerJogo = new javax.swing.JMenuItem();
         Pedido = new javax.swing.JMenu();
         GerPed = new javax.swing.JMenuItem();
+        GerCar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SteamBay");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         Arquivo.setText("Arquivo");
 
+        Sair.setMnemonic('S');
         Sair.setText("Sair");
+        Sair.setToolTipText("Sair do programa.");
         Sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SairActionPerformed(evt);
@@ -58,22 +65,53 @@ public class Principal extends javax.swing.JFrame {
 
         Fornecedor.setText("Fornecedor");
 
+        GerFornec.setMnemonic('F');
         GerFornec.setText("Gerenciar Fornecedor");
+        GerFornec.setToolTipText("Tela de gerenciamento de fornecedor.");
+        GerFornec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GerFornecActionPerformed(evt);
+            }
+        });
         Fornecedor.add(GerFornec);
 
         Menu.add(Fornecedor);
 
         Jogo.setText("Jogo");
 
+        GerJogo.setMnemonic('J');
         GerJogo.setText("Gerenciar Jogo");
+        GerJogo.setToolTipText("Tela de gerenciamento de jogos.");
+        GerJogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GerJogoActionPerformed(evt);
+            }
+        });
         Jogo.add(GerJogo);
 
         Menu.add(Jogo);
 
         Pedido.setText("Pedido");
 
+        GerPed.setMnemonic('P');
         GerPed.setText("Gerenciar Pedido");
+        GerPed.setToolTipText("Tela de gerenciamento de pedidos.");
+        GerPed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GerPedActionPerformed(evt);
+            }
+        });
         Pedido.add(GerPed);
+
+        GerCar.setMnemonic('C');
+        GerCar.setText("Gerenciar Carrinho");
+        GerCar.setToolTipText("Tela de gerenciamento de carrinho de compras.");
+        GerCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GerCarActionPerformed(evt);
+            }
+        });
+        Pedido.add(GerCar);
 
         Menu.add(Pedido);
 
@@ -96,6 +134,26 @@ public class Principal extends javax.swing.JFrame {
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
         System.exit(-1);
     }//GEN-LAST:event_SairActionPerformed
+
+    private void GerFornecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerFornecActionPerformed
+        CadastrarFornecedorUI cdfui = new CadastrarFornecedorUI();
+        cdfui.setVisible(true);
+    }//GEN-LAST:event_GerFornecActionPerformed
+
+    private void GerJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerJogoActionPerformed
+        CadastrarProdutoUI cdpui = new CadastrarProdutoUI();
+        cdpui.setVisible(true);
+    }//GEN-LAST:event_GerJogoActionPerformed
+
+    private void GerPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerPedActionPerformed
+        GerenciarPedidoUI grpeui = new GerenciarPedidoUI();
+        grpeui.setVisible(true);
+    }//GEN-LAST:event_GerPedActionPerformed
+
+    private void GerCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GerCarActionPerformed
+        GerenciarCarrinhoUI grcaui = new GerenciarCarrinhoUI();
+        grcaui.setVisible(true);
+    }//GEN-LAST:event_GerCarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +194,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu Arquivo;
     private javax.swing.JMenu Editar;
     private javax.swing.JMenu Fornecedor;
+    private javax.swing.JMenuItem GerCar;
     private javax.swing.JMenuItem GerFornec;
     private javax.swing.JMenuItem GerJogo;
     private javax.swing.JMenuItem GerPed;

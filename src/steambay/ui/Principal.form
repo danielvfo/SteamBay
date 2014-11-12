@@ -11,7 +11,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="Sair">
               <Properties>
+                <Property name="mnemonic" type="int" value="83"/>
                 <Property name="text" type="java.lang.String" value="Sair"/>
+                <Property name="toolTipText" type="java.lang.String" value="Sair do programa."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SairActionPerformed"/>
@@ -31,8 +33,13 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="GerFornec">
               <Properties>
+                <Property name="mnemonic" type="int" value="70"/>
                 <Property name="text" type="java.lang.String" value="Gerenciar Fornecedor"/>
+                <Property name="toolTipText" type="java.lang.String" value="Tela de gerenciamento de fornecedor."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GerFornecActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -43,8 +50,13 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="GerJogo">
               <Properties>
+                <Property name="mnemonic" type="int" value="74"/>
                 <Property name="text" type="java.lang.String" value="Gerenciar Jogo"/>
+                <Property name="toolTipText" type="java.lang.String" value="Tela de gerenciamento de jogos."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GerJogoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -55,8 +67,23 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="GerPed">
               <Properties>
+                <Property name="mnemonic" type="int" value="80"/>
                 <Property name="text" type="java.lang.String" value="Gerenciar Pedido"/>
+                <Property name="toolTipText" type="java.lang.String" value="Tela de gerenciamento de pedidos."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GerPedActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="GerCar">
+              <Properties>
+                <Property name="mnemonic" type="int" value="67"/>
+                <Property name="text" type="java.lang.String" value="Gerenciar Carrinho"/>
+                <Property name="toolTipText" type="java.lang.String" value="Tela de gerenciamento de carrinho de compras."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GerCarActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -65,6 +92,10 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="SteamBay"/>
+    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+      <Color id="Cursor Default"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="Menu"/>
