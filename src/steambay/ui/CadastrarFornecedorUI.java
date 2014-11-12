@@ -110,7 +110,6 @@ public class CadastrarFornecedorUI extends javax.swing.JFrame {
         remover = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Fornecedor");
         setResizable(false);
 

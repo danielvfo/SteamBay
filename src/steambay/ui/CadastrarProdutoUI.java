@@ -8,7 +8,6 @@ package steambay.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import steambay.dao.FornecedorDAO;
@@ -27,7 +26,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
      */
     public CadastrarProdutoUI() {
         initComponents();
-        Vector<Fornecedor> fornList = new Vector<>();
+        ArrayList<Fornecedor> fornList = new ArrayList<>();
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornList = fornecedorDAO.buscarTodos();
         for (int i = 0; i < fornList.size(); i++) {
@@ -368,6 +367,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         this.setVisible(false);
+        jButtonCleanActionPerformed(evt);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
@@ -442,7 +442,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         }
         jTextFieldQtde.setText("");
         jTextFieldTam.setText("");
-        Vector<Fornecedor> fornList = new Vector<>();
+        ArrayList<Fornecedor> fornList = new ArrayList<>();
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornList = fornecedorDAO.buscarTodos();
         for (int i = 0; i < fornList.size(); i++) {

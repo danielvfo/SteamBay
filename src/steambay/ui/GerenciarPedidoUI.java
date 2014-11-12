@@ -160,6 +160,7 @@ public class GerenciarPedidoUI extends javax.swing.JFrame {
     private void btnBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPedidoActionPerformed
         ArrayList<Jogo> jogos = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) tableItens.getModel();
+        model.setRowCount(0);
         jogos = pedidoDAO.buscarPedidoItens(Integer.parseInt(textPedido.getText().trim()));
         jogos.stream().forEach((item) -> {
             if (item.isTipo()) {
@@ -184,22 +185,17 @@ public class GerenciarPedidoUI extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         int idPedido;
+        int idJogo;
+        idPedido = Integer.parseInt(textPedido.getText());
+        pedidoDAO.removeRelacao(idPedido);
         DefaultTableModel model = (DefaultTableModel) tableItens.getModel();
         if (model.getRowCount() > 0) {
-            pedido.setQuantidade(model.getRowCount());
-            pedido.setTotal(Double.parseDouble(textValorTotal.getText().trim()));
-            try {
-                pedidoDAO.inserePedido(pedido);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(tableItens, "Erro ao finalizar pedido.");
-            }
-            idPedido = pedidoDAO.buscarPedidoRecente();
             for (int i = 0; i < model.getRowCount(); i++) {
-                pedidoDAO.insereJogoPedido(Integer.parseInt(String.valueOf(model.getValueAt(i, 4))), idPedido);
+                idJogo = Integer.parseInt(String.valueOf(model.getValueAt(i, 4)));
+                pedidoDAO.atualizar(idJogo, idPedido);
             }
-            JOptionPane.showMessageDialog(tableItens, "Pedido finalizado com sucesso!");
         } else {
-            JOptionPane.showMessageDialog(tableItens, "Impossível inserir pedido sem itens!");
+            JOptionPane.showMessageDialog(tableItens, "Impossível salvar pedido sem itens!");
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

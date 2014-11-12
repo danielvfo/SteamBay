@@ -60,7 +60,6 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Carrinho");
         setResizable(false);
 
@@ -309,7 +308,6 @@ public class GerenciarCarrinhoUI extends javax.swing.JFrame {
         for (int i = 0; i < model.getRowCount(); i++) {
             pedidodao.insereJogoPedido(Integer.parseInt(String.valueOf(model.getValueAt(i, 4))), idPedido);
         }
-        JOptionPane.showMessageDialog(jTable1, "Pedido finalizado com sucesso!");
         jButton3.setEnabled(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 

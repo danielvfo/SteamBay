@@ -142,4 +142,31 @@ public class PedidoDAO {
             conexao.fechar();
         }
     }
+    
+    public void atualizar(int jogo, int pedido) {
+        conexao.conectar();
+        try {
+                conexao.getComando().execute("INSERT INTO jogo_pedido (Jogo_id, Pedido_id) VALUES("
+                    + jogo + ", "
+                    + pedido + ")");
+                System.out.println("Pedido de id = " + pedido + " atualizado com sucesso!");        
+        } catch (SQLException e) {
+            conexao.imprimeErro("Erro ao atualizar pedido ", e.getMessage());
+        } finally {
+            conexao.fechar();
+        }
+    }
+    
+    public void removeRelacao(int pedido) {
+        conexao.conectar();
+        try {
+                conexao.getComando().executeUpdate("DELETE FROM jogo_pedido WHERE pedido_id = " + pedido + ";");
+                System.out.println("Pedido de id = " + pedido + " removido com sucesso!");
+                JOptionPane.showMessageDialog(null, "Pedido de id = " + pedido + " atualizado com sucesso!");   
+        } catch (SQLException e) {
+            conexao.imprimeErro("Erro ao atualizar pedido ", e.getMessage());
+        } finally {
+            conexao.fechar();
+        }
+    }
 }
