@@ -67,12 +67,13 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         jButtonClean = new javax.swing.JButton();
         jButtonUpdate = new javax.swing.JButton();
         jComboBoxForn = new javax.swing.JComboBox();
+        jLabelMandatoryFields = new javax.swing.JLabel();
 
         setTitle("Gerenciar Jogo");
         setResizable(false);
 
         jLabelNome.setLabelFor(jTextFieldNome);
-        jLabelNome.setText("Nome");
+        jLabelNome.setText("Nome*");
 
         jTextFieldNome.setToolTipText("Digite o nome do jogo.");
 
@@ -105,7 +106,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         });
 
         jLabelTam.setLabelFor(jTextFieldTam);
-        jLabelTam.setText("Tamanho");
+        jLabelTam.setText("Tamanho*");
 
         jTextFieldTam.setToolTipText("Digite o tamanho (com unidade de medida) que o jogo ocupará no disco rígido do usuário.");
         jTextFieldTam.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +116,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         });
 
         jLabelPreco.setLabelFor(jTextFieldPreco);
-        jLabelPreco.setText("Preço");
+        jLabelPreco.setText("Preço*");
 
         jTextFieldPreco.setToolTipText("Digite o preço (em Reais) do produto.");
         jTextFieldPreco.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +126,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         });
 
         jLabelEspec.setLabelFor(jTextAreaEspec);
-        jLabelEspec.setText("Especificações Técnicas");
+        jLabelEspec.setText("Especificações Técnicas*");
 
         jTextAreaEspec.setColumns(20);
         jTextAreaEspec.setRows(5);
@@ -135,7 +136,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextAreaEspec);
 
         jLabelDesc.setLabelFor(jTextAreaDesc);
-        jLabelDesc.setText("Descrição");
+        jLabelDesc.setText("Descrição*");
 
         jTextAreaDesc.setColumns(20);
         jTextAreaDesc.setRows(5);
@@ -199,6 +200,10 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
             }
         });
 
+        jLabelMandatoryFields.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelMandatoryFields.setText("* Campos obrigatórios");
+        jLabelMandatoryFields.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,19 +241,6 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                                 .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxForn, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButtonSearch)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonClean)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonDrop)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
-                        .addComponent(jButtonSave)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonCancel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,7 +248,25 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelDesc)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelMandatoryFields)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonSearch)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonClean)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonDrop)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonUpdate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                                .addComponent(jButtonSave)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonCancel)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -294,10 +304,12 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
                     .addComponent(jLabelEspec)
                     .addComponent(jLabelDesc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabelMandatoryFields, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
                     .addComponent(jButtonCancel)
@@ -526,6 +538,7 @@ public class CadastrarProdutoUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDesc;
     private javax.swing.JLabel jLabelEspec;
     private javax.swing.JLabel jLabelFornecedor;
+    private javax.swing.JLabel jLabelMandatoryFields;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelPreco;
     private javax.swing.JLabel jLabelQtde;

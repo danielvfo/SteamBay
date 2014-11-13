@@ -63,6 +63,8 @@ public class JogoDAO {
             System.out.println("Inserido!");
             JOptionPane.showMessageDialog(null, "Jogo cadastrado com sucesso!");
          }
+         else
+             JOptionPane.showMessageDialog(null, "Campo(s) obrigatório(s) vazio(s)!");
       } catch (SQLException e) {
          connct.imprimeErro("Erro ao inserir Jogo", e.getMessage());
       } finally {
@@ -106,5 +108,7 @@ public class JogoDAO {
            connct.fechar();  
         }
       }
+      else
+          JOptionPane.showMessageDialog(null, "Campo(s) obrigatório(s) vazio(s)!");
    }
 }

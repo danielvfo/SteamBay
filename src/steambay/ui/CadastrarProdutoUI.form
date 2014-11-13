@@ -66,20 +66,6 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jButtonSearch" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonClean" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonDrop" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="224" max="32767" attributes="0"/>
-                      <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="293" max="-2" attributes="0"/>
@@ -89,6 +75,28 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelDesc" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="322" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabelMandatoryFields" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jButtonSearch" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonClean" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonDrop" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="224" max="32767" attributes="0"/>
+                              <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -142,11 +150,13 @@
                   <Component id="jLabelDesc" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="105" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Component id="jScrollPane2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <Component id="jLabelMandatoryFields" min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonSave" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -166,7 +176,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jTextFieldNome"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nome"/>
+        <Property name="text" type="java.lang.String" value="Nome*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNome">
@@ -215,7 +225,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jTextFieldTam"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tamanho"/>
+        <Property name="text" type="java.lang.String" value="Tamanho*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTam">
@@ -231,7 +241,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jTextFieldPreco"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldPreco">
@@ -247,7 +257,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jTextAreaEspec"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Especifica&#xe7;&#xf5;es T&#xe9;cnicas"/>
+        <Property name="text" type="java.lang.String" value="Especifica&#xe7;&#xf5;es T&#xe9;cnicas*"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -275,7 +285,7 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="jTextAreaDesc"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
+        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o*"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -363,6 +373,15 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFornActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelMandatoryFields">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="* Campos obrigat&#xf3;rios"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
